@@ -1,9 +1,9 @@
 import React from 'react';
 import Hero from '../components/home/hero';
 import Trust from '../components/home/trust';
-import Bestsell from '../components/home/bestsell';
+import Bestsell from '../components/home/Bestsell';
 import OwnBy from '../components/home/ownby';
-import Collection from '../components/home/collection';
+import Collection from '../components/home/Collection';
 import Reviews from '../components/home/reviews';
 import CTA from '../components/home/cta';
 
