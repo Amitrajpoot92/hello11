@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { 
-  Filter, 
   SlidersHorizontal, 
-  ChevronRight, 
-  Share2, // Heart ki jagah Share2 import kiya
-  ShoppingBag, 
+  Share2, 
+  MessageCircle, // WhatsApp ke liye icon
   Search, 
   Star 
 } from 'lucide-react';
@@ -25,6 +23,14 @@ const Collections = () => {
     { id: 6, name: "Bridal Bangles Set", price: "₹3,75,000", category: "Bridal", img: collectionImg, tag: "Trending" },
   ];
 
+  // --- WHATSAPP REDIRECTION LOGIC ---
+  const handleWhatsAppInquiry = (product) => {
+    const phoneNumber = "8873873269";
+    const message = `Hello Shree Laxmi Jewellers, I am interested in the "${product.name}" (Category: ${product.category}) priced at ${product.price}. Could you please share more details?`;
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
+  };
+
   // --- NATIVE SHARE FUNCTIONALITY ---
   const handleShare = async (product) => {
     const shareData = {
@@ -37,7 +43,6 @@ const Collections = () => {
       if (navigator.share) {
         await navigator.share(shareData);
       } else {
-        // Fallback: Clipboard copy for browsers that don't support Web Share API
         await navigator.clipboard.writeText(`${shareData.text} ${shareData.url}`);
         alert("Product link copied to clipboard!");
       }
@@ -116,10 +121,10 @@ const Collections = () => {
                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                   />
                   
-                  {/* --- SHARE BUTTON (Replaced Heart) --- */}
+                  {/* SHARE BUTTON */}
                   <button 
                     onClick={() => handleShare(item)}
-                    className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-[#0f2d2a] shadow-lg hover:bg-[#0f2d2a] hover:text-white transition-all active:scale-90"
+                    className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-[#0f2d2a] shadow-lg hover:bg-[#0f2d2a] hover:text-white transition-all active:scale-90 z-20"
                   >
                     <Share2 size={18} />
                   </button>
@@ -130,9 +135,13 @@ const Collections = () => {
                     </span>
                   </div>
 
-                  <div className="absolute inset-0 bg-[#0f2d2a]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
-                     <button className="w-full bg-white text-[#0f2d2a] py-4 rounded-2xl font-bold text-[10px] tracking-widest uppercase flex items-center justify-center gap-2 transform translate-y-10 group-hover:translate-y-0 transition-transform duration-500 shadow-2xl">
-                       <ShoppingBag size={14} /> Quick View
+                  {/* HOVER WHATSAPP BUTTON (Desktop) */}
+                  <div className="absolute inset-0 bg-[#0f2d2a]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6 hidden md:flex">
+                     <button 
+                        onClick={() => handleWhatsAppInquiry(item)}
+                        className="w-full bg-white text-[#0f2d2a] py-4 rounded-2xl font-bold text-[10px] tracking-widest uppercase flex items-center justify-center gap-2 transform translate-y-10 group-hover:translate-y-0 transition-transform duration-500 shadow-2xl"
+                     >
+                       <MessageCircle size={14} /> Inquire on WhatsApp
                      </button>
                   </div>
                 </div>
@@ -149,8 +158,12 @@ const Collections = () => {
                   <h3 className="text-xl font-serif text-[#1a1a1a] group-hover:text-[#0f2d2a] transition-colors">{item.name}</h3>
                   <p className="text-2xl font-black text-[#0f2d2a] tracking-tighter">{item.price}</p>
                   
-                  <button className="w-full md:hidden bg-[#0f2d2a] text-white py-4 rounded-2xl mt-4 font-bold text-xs tracking-widest uppercase flex items-center justify-center gap-2 active:scale-95 transition-transform">
-                     <ShoppingBag size={16} /> Add to Cart
+                  {/* WHATSAPP BUTTON (Mobile - Always Visible) */}
+                  <button 
+                    onClick={() => handleWhatsAppInquiry(item)}
+                    className="w-full md:hidden bg-[#0f2d2a] text-white py-4 rounded-2xl mt-4 font-bold text-xs tracking-widest uppercase flex items-center justify-center gap-2 active:scale-95 transition-transform"
+                  >
+                     <MessageCircle size={16} /> Chat with Artisan
                   </button>
                 </div>
               </div>
@@ -161,12 +174,6 @@ const Collections = () => {
             <p className="text-gray-400 font-serif italic text-xl">No masterpieces found in this category...</p>
           </div>
         )}
-
-        <div className="mt-20 text-center">
-           <button className="border-b-2 border-[#d3a12a] pb-2 text-[#1a1a1a] font-bold tracking-[0.3em] text-xs hover:text-[#d3a12a] transition-all uppercase">
-             Discover More Pieces
-           </button>
-        </div>
       </main>
 
       <style jsx>{`
