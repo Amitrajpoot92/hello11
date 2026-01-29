@@ -6,10 +6,11 @@ import Header from './components/header.jsx';
 import Footer from './components/footer.jsx';
 
 // Page Components
-import Home from './pages/home.jsx';
+import Home from './pages/Home.jsx';
 import Signature from './pages/Signature.jsx';
 import Collections from './pages/collections.jsx';
 import About from './pages/about.jsx';
+
 
 function App() {
   return (

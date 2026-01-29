@@ -1,5 +1,5 @@
- import React, { useRef, useState } from 'react';
-import { Star, ShoppingBag, ArrowUpRight, Sparkles } from 'lucide-react';
+import React, { useRef, useState } from 'react';
+import { Star, Sparkles } from 'lucide-react';
 // Sahi path se image import
 import bestsellImg from '../../assets/bestsell/bestsell.png';
 
@@ -70,23 +70,16 @@ const Bestsell = () => {
               </div>
               
               {/* Product Info - Below Image for Mobile Clarity */}
-              <div className="mt-6 px-2 flex justify-between items-center">
-                <div className="space-y-1">
-                  <h4 className="text-2xl font-serif text-[#1a1a1a]">{prod.name}</h4>
-                  <div className="flex items-center gap-2">
-                    <div className="flex text-[#d3a12a]">
-                      <Star size={12} fill="currentColor" />
-                      <Star size={12} fill="currentColor" />
-                      <Star size={12} fill="currentColor" />
-                    </div>
-                    <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest underline decoration-[#d3a12a]">Details</span>
+              <div className="mt-6 px-2 flex flex-col items-start gap-1">
+                <h4 className="text-2xl font-serif text-[#1a1a1a]">{prod.name}</h4>
+                <div className="flex items-center gap-2">
+                  <div className="flex text-[#d3a12a]">
+                    <Star size={12} fill="currentColor" />
+                    <Star size={12} fill="currentColor" />
+                    <Star size={12} fill="currentColor" />
                   </div>
+                  <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest underline decoration-[#d3a12a]">Details</span>
                 </div>
-                
-                {/* Minimalist Action Button */}
-                <button className="bg-[#0f2d2a] text-white w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg active:scale-90 transition-transform">
-                  <ShoppingBag size={22} strokeWidth={1.5} />
-                </button>
               </div>
             </div>
           ))}

@@ -1,7 +1,19 @@
- import React from 'react';
+import React from 'react';
 import { MessageCircle, Gem, Sparkles, PenTool } from 'lucide-react';
 
 const CTA = () => {
+  // WhatsApp Logic
+  const handleWhatsAppClick = () => {
+    const phoneNumber = "8873873269";
+    const message = "Hello Sri Lakshmi Jewellers  Team, I am interested in a private consultation for a better jewelry piece. Please guide me through the process.";
+    
+    // URL encoding the message to handle spaces and special characters
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    window.open(whatsappUrl, '_blank');
+  };
+
   return (
     <section className="py-24 px-4 bg-[#faf9f6]">
       <div className="max-w-6xl mx-auto relative group">
@@ -38,12 +50,15 @@ const CTA = () => {
               Collaborate with our head artisans to transform your personal story into a <span className="text-white font-medium">one-of-a-kind</span> jewelry piece. From sketch to 3D render, we define excellence.
             </p>
 
-            {/* --- THE SIGNATURE WHATSAPP BUTTON --- */}
-            <button className="relative group/btn inline-flex items-center gap-4 bg-[#d3a12a] text-[#0f2d2a] px-12 py-5 rounded-full font-bold text-lg hover:bg-[#f5d54e] transition-all duration-500 shadow-[0_20px_40px_rgba(211,161,42,0.2)] active:scale-95">
+            {/* --- THE SIGNATURE WHATSAPP BUTTON (With Logic) --- */}
+            <button 
+              onClick={handleWhatsAppClick}
+              className="relative group/btn inline-flex flex-col md:flex-row items-center gap-4 bg-[#d3a12a] text-[#0f2d2a] px-8 md:px-12 py-5 rounded-[2rem] md:rounded-full font-bold text-base md:text-lg hover:bg-[#f5d54e] transition-all duration-500 shadow-[0_20px_40px_rgba(211,161,42,0.2)] active:scale-95"
+            >
               <div className="bg-[#0f2d2a] text-white p-2 rounded-full group-hover/btn:rotate-[360deg] transition-transform duration-700">
                 <MessageCircle size={20} fill="white" />
               </div>
-              <span>REQUEST PRIVATE CONSULTATION</span>
+              <span className="tracking-tight">REQUEST PRIVATE CONSULTATION</span>
             </button>
 
             {/* Subtle trust text */}

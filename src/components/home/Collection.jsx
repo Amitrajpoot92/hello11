@@ -1,9 +1,11 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Navigation hook import
 import { ArrowRight } from 'lucide-react';
 // Sahi path se image import
 import collectionImg from '../../assets/collection/collection.png';
 
 const Collection = () => {
+  const navigate = useNavigate(); // Initialize navigate function
   const scrollRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -13,21 +15,16 @@ const Collection = () => {
     img: collectionImg
   });
 
-  // Scroll handle karke active dot calculate karna
   const handleScroll = () => {
     if (scrollRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      
-      // Laptop pe 3 items hain aur Mobile pe 1, isliye percentage se index nikalna best hai
       const scrollPercentage = scrollLeft / (scrollWidth - clientWidth);
-      const totalDots = 5; // Hame 5 dots chahiye
+      const totalDots = 5; 
       const newIndex = Math.round(scrollPercentage * (totalDots - 1));
-      
       setActiveIndex(newIndex);
     }
   };
 
-  // Dots par click karke scroll karne ke liye (Desktop feature)
   const scrollToPercent = (dotIndex) => {
     if (scrollRef.current) {
       const totalDots = 5;
@@ -51,7 +48,11 @@ const Collection = () => {
             <h2 className="text-[#f5d54e] font-bold tracking-[0.3em] mb-4 uppercase text-[10px] md:text-sm">Curated For You</h2>
             <h3 className="text-4xl md:text-5xl font-serif">Explore Collections</h3>
           </div>
-          <button className="w-fit border border-[#d3a12a] text-[#d3a12a] px-8 py-3 rounded-full hover:bg-[#d3a12a] hover:text-[#1a1a1a] transition-all text-sm font-bold">
+          {/* View All Button - Added Redirect */}
+          <button 
+            onClick={() => navigate('/collections')}
+            className="w-fit border border-[#d3a12a] text-[#d3a12a] px-8 py-3 rounded-full hover:bg-[#d3a12a] hover:text-[#1a1a1a] transition-all text-sm font-bold active:scale-95"
+          >
             View All
           </button>
         </div>
@@ -79,20 +80,24 @@ const Collection = () => {
               
               {/* Content */}
               <div className="absolute bottom-8 left-8 right-8">
-                 <h4 className="text-2xl font-serif mb-4 leading-tight">{cat.title}</h4>
-                 
-                 <div className="w-10 h-10 bg-[#d3a12a] rounded-full flex items-center justify-center group-hover:w-36 transition-all duration-500 overflow-hidden shadow-lg shadow-[#d3a12a]/20">
-                    <ArrowRight className="min-w-[20px] text-[#1a1a1a]"/>
-                    <span className="ml-3 text-[#1a1a1a] font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity text-xs">
-                      EXPLORE NOW
-                    </span>
-                 </div>
+                  <h4 className="text-2xl font-serif mb-4 leading-tight">{cat.title}</h4>
+                  
+                  {/* Explore Button - Fixed for Phone View Visibility & Added Redirect */}
+                  <div 
+                    onClick={() => navigate('/collections')}
+                    className="w-36 md:w-10 h-10 bg-[#d3a12a] rounded-full flex items-center justify-center md:group-hover:w-36 transition-all duration-500 overflow-hidden shadow-lg shadow-[#d3a12a]/20 cursor-pointer"
+                  >
+                     <ArrowRight className="min-w-[20px] text-[#1a1a1a] ml-0 md:ml-0"/>
+                     <span className="ml-3 text-[#1a1a1a] font-bold whitespace-nowrap opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity text-xs">
+                       EXPLORE NOW
+                     </span>
+                  </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* --- DOTTED PROGRESS BAR (For Both Mobile & Laptop) --- */}
+        {/* --- DOTTED PROGRESS BAR --- */}
         <div className="flex flex-col items-center mt-4">
           <div className="flex gap-3 items-center">
             {[...Array(5)].map((_, i) => (
@@ -109,7 +114,6 @@ const Collection = () => {
             ))}
           </div>
           
-          {/* Subtle percentage text for modern look */}
           <span className="mt-4 text-[10px] text-[#f5d54e] font-bold tracking-[0.3em] uppercase opacity-40">
             Slide {activeIndex + 1} / 5
           </span>

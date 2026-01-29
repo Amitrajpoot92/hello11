@@ -1,86 +1,145 @@
- import React from 'react';
-import { MapPin, Phone, Mail, Instagram, Facebook, Twitter, ShieldCheck } from 'lucide-react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { MapPin, Phone, Instagram, Facebook, Twitter, ShieldCheck, ExternalLink, ChevronRight } from 'lucide-react';
 
 const Footer = () => {
+  const navigate = useNavigate();
+  const wpNumber = "8873873269";
+
+  // Social Media Redirection Logic
+  const socialLinks = {
+    instagram: "", 
+    facebook: "",  
+    twitter: ""    
+  };
+
+  const handleSocialClick = (platform) => {
+    const url = socialLinks[platform];
+    if (url) window.open(url, "_blank");
+  };
+
   return (
-    <footer className="bg-[#1a1a1a] text-white pt-20 pb-28 md:pb-10 border-t border-[#d3a12a]/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 lg:gap-16">
+    <footer className="bg-[#1a1a1a] text-white pt-16 pb-32 md:pb-12 border-t border-[#d3a12a]/30 relative overflow-hidden">
+      
+      {/* Background Decor for Mobile Feel */}
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#d3a12a]/50 to-transparent"></div>
+
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           
-          {/* 1. Brand Identity */}
-          <div className="md:col-span-1 text-center md:text-left">
-            <h2 className="text-[#d3a12a] text-2xl font-serif font-bold mb-6 uppercase tracking-[0.2em]">
-              Jewel<span className="text-white">Craft</span>
+          {/* 1. Brand Section */}
+          <div className="text-center md:text-left">
+            <h2 className="text-[#d3a12a] text-2xl font-serif font-bold mb-4 uppercase tracking-tighter">
+              Shree Laxmi <span className="text-white block md:inline">Jewellers & Sons</span>
             </h2>
-            <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              Serving brilliance since 1996. We specialize in handcrafted heritage jewelry and bespoke bridal collections.
+            <p className="text-gray-500 text-[11px] leading-relaxed mb-8 max-w-xs mx-auto md:mx-0">
+              Defining purity and heritage since 1996. Every piece tells a story of craftsmanship.
             </p>
-            <div className="flex justify-center md:justify-start gap-4">
-              {[Instagram, Facebook, Twitter].map((Icon, i) => (
-                <a key={i} href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#d3a12a] hover:text-[#1a1a1a] transition-all duration-500">
-                  <Icon size={18} />
-                </a>
+            
+            {/* Social Icons - Bigger Touch Targets for Mobile */}
+            <div className="flex justify-center md:justify-start gap-5">
+              {['instagram', 'facebook', 'twitter'].map((platform) => (
+                <button 
+                  key={platform}
+                  onClick={() => handleSocialClick(platform)}
+                  className="w-12 h-12 rounded-2xl border border-white/5 bg-white/5 flex items-center justify-center hover:bg-[#d3a12a] hover:text-[#1a1a1a] transition-all duration-300 active:scale-90"
+                >
+                  {platform === 'instagram' && <Instagram size={20} />}
+                  {platform === 'facebook' && <Facebook size={20} />}
+                  {platform === 'twitter' && <Twitter size={20} />}
+                </button>
               ))}
             </div>
           </div>
 
-          {/* 2. Quick Links */}
-          <div className="text-center md:text-left">
-            <h3 className="text-[#f5d54e] font-bold uppercase tracking-widest text-xs mb-8">Quick Links</h3>
-            <ul className="space-y-4 text-gray-400 text-sm">
-              <li><a href="#collection" className="hover:text-[#d3a12a] transition-colors">Collections</a></li>
-              <li><a href="#rates" className="hover:text-[#d3a12a] transition-colors">Live Rates</a></li>
-              <li><a href="#" className="hover:text-[#d3a12a] transition-colors">Privacy Policy</a></li>
-            </ul>
+          {/* 2. Navigation - Mobile Accordion Style feel */}
+          <div className="grid grid-cols-2 md:grid-cols-2 gap-8 md:col-span-2">
+            <div className="text-left">
+              <h3 className="text-[#f5d54e] font-bold uppercase tracking-widest text-[10px] mb-6 opacity-50">Navigation</h3>
+              <ul className="space-y-4 text-gray-300 text-[11px] font-bold tracking-widest uppercase">
+                <li><button onClick={() => navigate('/')} className="flex items-center gap-2 hover:text-[#d3a12a] transition-all"><ChevronRight size={10} className="text-[#d3a12a]"/> Home</button></li>
+                <li><button onClick={() => navigate('/signature')} className="flex items-center gap-2 hover:text-[#d3a12a] transition-all"><ChevronRight size={10} className="text-[#d3a12a]"/> Signature</button></li>
+                <li><button onClick={() => navigate('/collections')} className="flex items-center gap-2 hover:text-[#d3a12a] transition-all"><ChevronRight size={10} className="text-[#d3a12a]"/> Collection</button></li>
+                <li><button onClick={() => navigate('/about')} className="flex items-center gap-2 hover:text-[#d3a12a] transition-all"><ChevronRight size={10} className="text-[#d3a12a]"/> About</button></li>
+              </ul>
+            </div>
+            <div className="text-left">
+              <h3 className="text-[#f5d54e] font-bold uppercase tracking-widest text-[10px] mb-6 opacity-50">Legal</h3>
+              <ul className="space-y-4 text-gray-400 text-[11px] uppercase tracking-widest">
+                <li><a href="#" className="hover:text-white transition-all">Privacy</a></li>
+                <li><a href="#" className="hover:text-white transition-all">Terms</a></li>
+                <li><a href="#" className="hover:text-white transition-all">Returns</a></li>
+              </ul>
+            </div>
           </div>
 
-          {/* 3. Support */}
-          <div className="text-center md:text-left">
-            <h3 className="text-[#f5d54e] font-bold uppercase tracking-widest text-xs mb-8">Support</h3>
-            <ul className="space-y-4 text-gray-400 text-sm">
-              <li><a href="#" className="hover:text-[#d3a12a] transition-colors">Terms of Service</a></li>
-              <li><a href="#" className="hover:text-[#d3a12a] transition-colors">Shipping & Returns</a></li>
-              <li><a href="#" className="hover:text-[#d3a12a] transition-colors">Care Guide</a></li>
-            </ul>
-          </div>
-
-          {/* 4. Contact Box with New Green #0f2d2a */}
-          <div className="bg-[#0f2d2a] p-8 rounded-[2rem] border border-[#d3a12a]/20 shadow-2xl relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-4 opacity-5">
-               <ShieldCheck size={80} className="text-white" />
+          {/* 3. Contact Card - ADVANCED PHONE VIEW */}
+          <div className="bg-gradient-to-br from-[#0f2d2a] to-[#071a18] p-8 rounded-[2.5rem] border border-[#d3a12a]/20 shadow-2xl relative overflow-hidden group">
+            <div className="absolute -top-6 -right-6 p-4 opacity-5 rotate-12">
+               <ShieldCheck size={120} className="text-white" />
             </div>
             
-            <h3 className="text-[#f5d54e] font-bold mb-6 text-sm uppercase tracking-widest">Visit Us</h3>
+            <h3 className="text-[#f5d54e] font-bold mb-6 text-[10px] uppercase tracking-widest text-left">Visit Our Store</h3>
             
-            <div className="space-y-4 relative z-10 text-left">
-              <div className="flex items-start gap-4 text-gray-300">
-                <MapPin className="text-[#d3a12a] shrink-0" size={18} />
-                <p className="text-xs">401 Diamond Tower, Bandra West, Mumbai 400050</p>
+            <div className="space-y-6 relative z-10 text-left">
+              {/* Address */}
+              <div className="flex items-start gap-4 text-gray-300 group/loc">
+                <div className="w-8 h-8 rounded-full bg-[#d3a12a]/10 flex items-center justify-center shrink-0">
+                  <MapPin className="text-[#d3a12a]" size={16} />
+                </div>
+                <p className="text-[11px] leading-relaxed group-hover:text-white transition-colors">
+                  Mandir Road, Mairwa <br/> Siwan (Bihar) - 841239
+                </p>
               </div>
-              <div className="flex items-center gap-4 text-gray-300">
-                <Phone className="text-[#d3a12a] shrink-0" size={18} />
-                <p className="text-xs">+91 99887 76655</p>
-              </div>
+
+              {/* Click-to-Call Feature */}
+              <a 
+                href={`tel:+91${wpNumber}`} 
+                className="flex items-center gap-4 text-gray-300 group/phone active:scale-95 transition-transform"
+              >
+                <div className="w-8 h-8 rounded-full bg-[#0b9c42]/20 flex items-center justify-center shrink-0 animate-pulse">
+                  <Phone className="text-[#0b9c42]" size={16} />
+                </div>
+                <div>
+                  <p className="text-[11px] font-black tracking-widest">+91 {wpNumber.slice(0,5)} {wpNumber.slice(5)}</p>
+                  <p className="text-[8px] text-[#0b9c42] uppercase font-bold tracking-tighter">Tap to call now</p>
+                </div>
+              </a>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-white/10">
-              <p className="text-[10px] font-bold text-[#f5d54e] uppercase tracking-[0.2em] flex items-center gap-2">
-                <ShieldCheck size={14} /> BIS 916 Hallmarked
-              </p>
+            <div className="mt-8 pt-5 border-t border-white/5">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-[#f5d54e] animate-ping"></div>
+                <span className="text-[9px] font-bold text-[#f5d54e] uppercase tracking-widest">BIS 916 Hallmarked Store</span>
+              </div>
             </div>
           </div>
 
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-[10px] text-gray-600 uppercase tracking-[0.3em]">
-            &copy; {new Date().getFullYear()} JewelCraft. All Rights Reserved.
-          </p>
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] text-gray-600 uppercase tracking-widest">Powered by</span>
-            <span className="text-[#d3a12a] font-bold text-xs uppercase tracking-tighter">CodeWebX</span>
+        {/* 4. Bottom Branding Area */}
+        <div className="mt-20 pt-10 border-t border-white/5 flex flex-col items-center gap-8">
+          
+          <div className="text-center space-y-2">
+            <p className="text-[9px] text-gray-600 uppercase tracking-[0.4em]">
+              &copy; {new Date().getFullYear()} Shree Laxmi Jewellers.
+            </p>
           </div>
+
+          {/* Highlighted CodeWebX Logo Section */}
+          <a 
+            href="https://www.codewebx.in/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="group relative flex flex-col items-center p-4 rounded-3xl transition-all duration-500"
+          >
+            <span className="text-[8px] text-yellow-500 uppercase tracking-[0.5em] mb-2 group-hover:text-[#d3a12a] transition-colors">Developed & Managed By</span>
+            <div className="flex items-center gap-2 bg-white/[0.03] px-6 py-3 rounded-2xl border border-white/5 group-hover:border-[#d3a12a]/30 group-hover:bg-[#d3a12a]/5 transition-all">
+               <span className="text-white font-black text-lg tracking-tighter group-hover:text-[#d3a12a] transition-colors italic">CODEWEBX</span>
+               <div className="w-1.5 h-1.5 rounded-full bg-[#d3a12a] shadow-[0_0_10px_#d3a12a]"></div>
+               <ExternalLink size={12} className="text-gray-700 group-hover:text-white ml-2" />
+            </div>
+          </a>
         </div>
       </div>
     </footer>

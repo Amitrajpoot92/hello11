@@ -19,12 +19,12 @@ const OwnBy = () => {
               <img 
                 src={ownerImg} 
                 className="w-full h-[400px] md:h-[600px] object-cover object-top transition-all duration-1000" 
-                alt="Rajesh Sharma - Owner" 
+                alt="Mahesh Kumar Soni - Owner" 
               />
               
               {/* Mobile Info Overlay - Using New #0f2d2a */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#0f2d2a]/95 via-[#0f2d2a]/20 to-transparent flex flex-col justify-end p-6 md:hidden">
-                 <h3 className="text-[#f5d54e] text-2xl font-serif">Mr. Rajesh Sharma</h3>
+                 <h3 className="text-[#f5d54e] text-2xl font-serif">Mahesh Kumar Soni</h3>
                  <p className="text-white/80 text-sm tracking-widest uppercase font-medium">Founder & Visionary</p>
               </div>
             </div>
@@ -49,7 +49,7 @@ const OwnBy = () => {
           {/* Badge with New Green Background */}
           <div className="inline-flex items-center gap-3 bg-[#0f2d2a]/5 px-4 py-2 rounded-full border border-[#0f2d2a]/10">
              <div className="w-2 h-2 rounded-full bg-[#d3a12a] animate-ping"></div>
-             <span className="text-[#0f2d2a] font-bold tracking-[0.2em] uppercase text-[10px] md:text-xs">The Heart of JewelCraft</span>
+             <span className="text-[#0f2d2a] font-bold tracking-[0.2em] uppercase text-[10px] md:text-xs">The Heart of Shree Laxmi Jewellers & Sons</span>
           </div>
 
           <h2 className="text-4xl md:text-6xl font-serif leading-tight text-[#1a1a1a]">
@@ -60,7 +60,7 @@ const OwnBy = () => {
           <div className="relative">
             <Quote className="absolute -top-4 -left-2 text-[#d3a12a]/20 w-12 h-12 rotate-180" />
             <p className="text-gray-600 text-lg md:text-xl leading-relaxed italic pl-6 relative z-10">
-              "Humara vishwas hai ki har gehna ek kahani sunata hai. 1996 se Rajesh Sharma ke netritva mein humne shuddhata aur vishwas ki parampara ko banaye rakha hai."
+              "Humara vishwas hai ki har gehna ek kahani sunata hai. 1996 se Mahesh Kumar Soni ke netritva mein humne shuddhata aur vishwas ki parampara ko banaye rakha hai."
             </p>
           </div>
 
@@ -79,7 +79,7 @@ const OwnBy = () => {
           {/* Footer of Section */}
           <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-6 border-t border-gray-100">
             <div className="text-center md:text-left">
-               <p className="text-[#1a1a1a] font-serif text-3xl">Rajesh Sharma</p>
+               <p className="text-[#1a1a1a] font-serif text-3xl">Mahesh Kumar Soni</p>
                <p className="text-[#d3a12a] text-xs font-bold uppercase tracking-[0.3em] mt-1">Founder & CEO</p>
             </div>
             

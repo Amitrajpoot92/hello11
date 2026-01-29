@@ -1,97 +1,113 @@
 import React from 'react';
+import { motion } from 'framer-motion'; // Animation ke liye
 import { ShieldCheck, Truck, RotateCcw, Gem, Sparkles } from 'lucide-react';
 
 const Trust = () => {
   const features = [
     {
-      icon: <ShieldCheck size={36} />,
+      icon: <ShieldCheck size={32} />,
       title: "Purity Gold",
       desc: "BIS 916 Hallmarked",
-      color: "from-amber-200 to-yellow-500",
-      offset: "lg:mt-0"
+      color: "from-amber-100 to-[#d3a12a]",
+      glow: "shadow-amber-500/20"
     },
     {
-      icon: <Gem size={36} />,
+      icon: <Gem size={32} />,
       title: "Gem Quality",
       desc: "GIA & IGI Certified",
-      color: "from-emerald-200 to-green-500",
-      offset: "lg:mt-12"
+      color: "from-emerald-100 to-emerald-600",
+      glow: "shadow-emerald-500/20"
     },
     {
-      icon: <Truck size={36} />,
+      icon: <Truck size={32} />,
       title: "Secure Care",
       desc: "Fully Insured Delivery",
-      color: "from-blue-200 to-blue-500",
-      offset: "lg:mt-0"
+      color: "from-blue-100 to-blue-600",
+      glow: "shadow-blue-500/20"
     },
     {
-      icon: <RotateCcw size={36} />,
+      icon: <RotateCcw size={32} />,
       title: "Fair Value",
       desc: "Transparent Buyback",
-      color: "from-rose-200 to-rose-500",
-      offset: "lg:mt-12"
+      color: "from-rose-100 to-rose-600",
+      glow: "shadow-rose-500/20"
     }
   ];
 
   return (
-    <section className="py-24 bg-[#faf9f6] relative overflow-hidden">
-      {/* Background Luxury Element */}
-      <div className="absolute top-0 right-0 p-20 opacity-5 pointer-events-none">
-        <Sparkles size={400} className="text-[#d3a12a]" />
+    <section className="py-20 bg-[#faf9f6] relative overflow-hidden px-4">
+      {/* Background Decor */}
+      <div className="absolute -top-20 -right-20 opacity-5 pointer-events-none">
+        <Sparkles size={300} className="text-[#d3a12a]" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10">
         
-        {/* Section Header - High Fashion Look */}
-        <div className="flex flex-col md:flex-row items-baseline gap-4 mb-20 border-b border-gray-100 pb-10">
-          <span className="text-7xl font-serif text-[#0f2d2a] opacity-10">01</span>
-          <div>
-            <h3 className="text-4xl md:text-5xl font-serif text-[#1a1a1a]">Our Sacred <span className="italic text-[#d3a12a]">Promises</span></h3>
-            <p className="text-gray-400 uppercase tracking-[0.3em] text-[10px] mt-2 font-bold">The Pillars of JewelCraft Excellence</p>
-          </div>
-        </div>
+        {/* Header - Fixed for Mobile Spacing */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-16 border-l-4 border-[#d3a12a] pl-6"
+        >
+          <h3 className="text-4xl font-serif text-[#1a1a1a] leading-tight">
+            Our Sacred <br/>
+            <span className="italic text-[#d3a12a]">Promises</span>
+          </h3>
+          <p className="text-gray-400 uppercase tracking-[0.3em] text-[10px] mt-3 font-bold">
+            The Pillars of Excellence
+          </p>
+        </motion.div>
 
-        {/* --- INTERACTIVE ASYMMETRIC GRID --- */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        {/* --- GRID: Optimized for Mobile & Laptop --- */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10">
           
           {features.map((item, idx) => (
-            <div 
-              key={idx} 
-              className={`group relative ${item.offset} transition-all duration-1000`}
+            <motion.div 
+              key={idx}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              className="group relative"
             >
-              {/* The "Ghost" Card Behind */}
-              <div className="absolute inset-0 bg-[#0f2d2a] rounded-[3rem] translate-x-3 translate-y-3 opacity-0 group-hover:opacity-100 transition-all duration-500 -z-10 blur-xl"></div>
-
               {/* Main Card */}
-              <div className="bg-white p-10 rounded-[3rem] h-full shadow-[0_15px_40px_-15px_rgba(0,0,0,0.05)] border border-gray-50 flex flex-col items-center group-hover:bg-[#0f2d2a] group-hover:border-transparent transition-all duration-700 overflow-hidden">
+              <div className="bg-white p-8 rounded-[2.5rem] h-full shadow-[0_15px_40px_-15px_rgba(0,0,0,0.08)] border border-gray-100 flex flex-col items-center relative overflow-hidden md:group-hover:bg-[#0f2d2a] md:group-hover:border-transparent transition-all duration-500">
                 
-                {/* Floating Icon Sphere */}
-                <div className="relative mb-10">
-                  <div className={`absolute inset-0 bg-gradient-to-tr ${item.color} rounded-full blur-2xl opacity-0 group-hover:opacity-40 transition-opacity duration-700 scale-150`}></div>
-                  
-                  <div className="w-20 h-20 rounded-full bg-[#faf9f6] text-[#0f2d2a] flex items-center justify-center relative z-10 shadow-inner group-hover:scale-110 group-hover:bg-[#d3a12a] transition-all duration-700 transform group-hover:-translate-y-4">
+                {/* Background Gradient Blob (Visible on Mobile) */}
+                <div className={`absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br ${item.color} opacity-10 rounded-full blur-3xl`}></div>
+
+                {/* Icon Box */}
+                <div className="relative mb-8">
+                  <div className={`w-20 h-20 rounded-2xl bg-[#faf9f6] text-[#0f2d2a] flex items-center justify-center relative z-10 shadow-sm border border-gray-50 md:group-hover:bg-[#d3a12a] md:group-hover:text-[#0f2d2a] transition-all duration-500 shadow-inner`}>
                     {item.icon}
+                  </div>
+                  {/* Verified Badge - Always visible on Mobile */}
+                  <div className="absolute -bottom-2 -right-2 bg-[#d3a12a] text-white p-1.5 rounded-full shadow-lg z-20">
+                    <ShieldCheck size={12} strokeWidth={3} />
                   </div>
                 </div>
 
-                <div className="text-center space-y-3">
-                  <h4 className="text-2xl font-serif text-[#1a1a1a] group-hover:text-white transition-colors duration-500">
+                <div className="text-center space-y-2">
+                  <h4 className="text-xl font-serif text-[#1a1a1a] md:group-hover:text-white transition-colors">
                     {item.title}
                   </h4>
-                  <div className="w-8 h-[1px] bg-[#d3a12a] mx-auto group-hover:w-16 transition-all duration-500"></div>
-                  <p className="text-gray-400 group-hover:text-white/60 text-sm font-medium tracking-wide transition-colors duration-500">
+                  <div className="w-6 h-[1.5px] bg-[#d3a12a] mx-auto"></div>
+                  <p className="text-gray-400 md:group-hover:text-white/60 text-xs font-medium tracking-wide">
                     {item.desc}
                   </p>
                 </div>
 
-                {/* Animated Bottom Detail */}
-                <div className="mt-8 opacity-0 group-hover:opacity-100 transition-all duration-1000 flex items-center gap-2">
-                   <div className="w-1.5 h-1.5 rounded-full bg-[#d3a12a] animate-ping"></div>
-                   <span className="text-[10px] text-[#f5d54e] font-bold tracking-widest uppercase">Verified Luxury</span>
+                {/* Mobile Bottom Status - Dynamic Look */}
+                <div className="mt-8 flex items-center gap-2 px-4 py-1.5 bg-[#faf9f6] rounded-full border border-gray-50 md:group-hover:bg-white/10 md:group-hover:border-transparent">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#0b9c42] animate-pulse"></div>
+                  <span className="text-[9px] text-gray-500 font-bold tracking-widest uppercase md:group-hover:text-[#f5d54e]">
+                    Purity Verified
+                  </span>
                 </div>
               </div>
 
-            </div>
+            </motion.div>
           ))}
 
         </div>

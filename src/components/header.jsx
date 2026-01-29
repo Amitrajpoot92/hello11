@@ -20,7 +20,7 @@ const Header = () => {
             {/* Logo Section */}
             <div className="flex-shrink-0 group cursor-pointer" onClick={() => window.location.href = '/'}>
               <h1 className="text-2xl font-serif font-bold text-[#d3a12a] tracking-[0.3em] transition-all group-hover:tracking-[0.4em]">
-                JEWEL<span className="text-white">CRAFT</span>
+                SHREE LAXMI <span className="text-white">JEWELLERS</span>
               </h1>
               <p className="text-[8px] text-white/40 tracking-[0.6em] uppercase text-center">Bespoke Jewelry</p>
             </div>
@@ -51,7 +51,7 @@ const Header = () => {
       {/* --- MOBILE TOP LOGO BAR --- */}
       <header className="md:hidden bg-[#0f2d2a] text-center py-5 border-b border-[#d3a12a]/20 sticky top-0 z-[100] backdrop-blur-xl bg-opacity-95">
         <h1 className="text-xl font-serif font-bold text-[#d3a12a] tracking-[0.3em]" onClick={() => window.location.href = '/'}>
-          JEWEL<span className="text-white">CRAFT</span>
+          SHREE LAXMI <span className="text-white">JEWELLERS</span>
         </h1>
         <div className="flex justify-center items-center gap-1 mt-1">
           <div className="h-[1px] w-4 bg-[#d3a12a]/40"></div>

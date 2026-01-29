@@ -23,7 +23,7 @@ const About = () => {
         <div className="relative z-10 max-w-4xl mx-auto">
           <span className="text-[#f5d54e] text-[10px] font-bold tracking-[0.5em] uppercase mb-6 block">Established 1996</span>
           <h1 className="text-5xl md:text-8xl font-serif text-white mb-8">
-            The Soul of <br/> <span className="italic text-[#f5d54e]">JewelCraft</span>
+            The Soul of <br/> <span className="italic text-[#f5d54e]">Shree Laxmi Jewellers</span>
           </h1>
           <p className="text-white/60 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto">
             Humara vishwas hai ki har gehna ek kahani sunata hai. Teen dashako se humne shuddhata aur vishwas ki parampara ko banaye rakha hai.
@@ -50,7 +50,7 @@ const About = () => {
           <div className="w-full lg:w-1/2 relative">
              <div className="absolute -inset-4 border border-[#d3a12a]/20 rounded-[3rem] rotate-3 -z-10"></div>
              <div className="rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white">
-                <img src={ownerImg} alt="Mr. Rajesh Sharma" className="w-full h-auto object-cover" />
+                <img src={ownerImg} alt="Mahesh Kumar Soni - Owner" className="w-full h-auto object-cover" />
              </div>
              <div className="absolute -bottom-6 -right-6 bg-[#d3a12a] p-6 rounded-3xl shadow-xl hidden md:block">
                 <Award size={40} className="text-[#0f2d2a]" />
@@ -59,19 +59,19 @@ const About = () => {
 
           <div className="w-full lg:w-1/2 space-y-8">
             <h2 className="text-4xl md:text-6xl font-serif text-[#1a1a1a] leading-tight">
-              A Legacy Crafted by <br/> <span className="italic text-[#0f2d2a]">Rajesh Sharma</span>
+              A Legacy Crafted by <br/> <span className="italic text-[#0f2d2a]">Mahesh Kumar Soni</span>
             </h2>
             <div className="space-y-6 text-gray-600 leading-relaxed text-lg">
               <p>
-                1996 mein ek choti si workshop se shuru hua ye safar, aaj vishwas ka doosra naam ban gaya hai. Rajesh Sharma ji ka manna hai ki jewelry sirf ek metal nahi, balki emotions ka ek hissa hai.
+                1996 mein ek choti si workshop se shuru hua ye safar, aaj vishwas ka doosra naam ban gaya hai. Mahesh Kumar Soni ji ka manna hai ki jewelry sirf ek metal nahi, balki emotions ka ek hissa hai.
               </p>
               <p>
-                Unke netritva mein JewelCraft ne hamesha **BIS Hallmarked** gold aur certified stones ki purity ko priority di hai, taaki aapka har investment surakshit rahe.
+                Unke netritva mein Shree Laxmi Jewellers ne hamesha **BIS Hallmarked** gold aur certified stones ki purity ko priority di hai, taaki aapka har investment surakshit rahe.
               </p>
             </div>
             <div className="pt-8 flex items-center gap-6">
                <div className="h-[1px] w-20 bg-[#d3a12a]"></div>
-               <span className="font-serif text-2xl italic text-[#0f2d2a]">Rajesh Sharma</span>
+               <span className="font-serif text-2xl italic text-[#0f2d2a]">Mahesh Kumar Soni - Owner</span>
             </div>
           </div>
         </div>
@@ -109,7 +109,7 @@ const About = () => {
       <section className="py-20 text-center px-6">
          <p className="text-[10px] text-gray-400 uppercase tracking-[0.5em] mb-4 font-bold">Digital Innovation Partner</p>
          <h3 className="text-xl md:text-2xl font-bold text-[#1a1a1a] tracking-widest">
-           JEWELCRAFT <span className="text-[#d3a12a]">×</span> CODEWEBX
+           Shree Laxmi Jewellers <span className="text-[#d3a12a]">×</span> CODEWEBX
          </h3>
          <p className="mt-4 text-gray-500 text-sm max-w-xl mx-auto italic">
            Combining 30 years of offline trust with cutting-edge digital experiences for the modern era.

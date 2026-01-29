@@ -3,7 +3,7 @@ import {
   Filter, 
   SlidersHorizontal, 
   ChevronRight, 
-  Heart, 
+  Share2, // Heart ki jagah Share2 import kiya
   ShoppingBag, 
   Search, 
   Star 
@@ -16,7 +16,6 @@ const Collections = () => {
 
   const categories = ['All', 'Bridal', 'Diamonds', 'Antique Gold', 'Daily Wear', 'Polki'];
 
-  // Mock data with different categories to test filtering
   const allProducts = [
     { id: 1, name: "Royal Heritage Choker", price: "₹8,50,000", category: "Bridal", img: collectionImg, tag: "Trending" },
     { id: 2, name: "Diamond Solitaire Ring", price: "₹2,10,000", category: "Diamonds", img: collectionImg, tag: "New" },
@@ -26,7 +25,27 @@ const Collections = () => {
     { id: 6, name: "Bridal Bangles Set", price: "₹3,75,000", category: "Bridal", img: collectionImg, tag: "Trending" },
   ];
 
-  // Logic: Filter products based on category and search text
+  // --- NATIVE SHARE FUNCTIONALITY ---
+  const handleShare = async (product) => {
+    const shareData = {
+      title: `Shree Laxmi Jewellers - ${product.name}`,
+      text: `Check out this beautiful ${product.name} at Shree Laxmi Jewellers. Price: ${product.price}`,
+      url: window.location.href, 
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else {
+        // Fallback: Clipboard copy for browsers that don't support Web Share API
+        await navigator.clipboard.writeText(`${shareData.text} ${shareData.url}`);
+        alert("Product link copied to clipboard!");
+      }
+    } catch (err) {
+      console.error('Error sharing:', err);
+    }
+  };
+
   const filteredProducts = allProducts.filter(item => {
     const matchesCategory = activeCategory === 'All' || item.category === activeCategory;
     const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase());
@@ -97,8 +116,12 @@ const Collections = () => {
                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                   />
                   
-                  <button className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-[#1a1a1a] shadow-lg hover:text-red-500 transition-colors">
-                    <Heart size={18} />
+                  {/* --- SHARE BUTTON (Replaced Heart) --- */}
+                  <button 
+                    onClick={() => handleShare(item)}
+                    className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-[#0f2d2a] shadow-lg hover:bg-[#0f2d2a] hover:text-white transition-all active:scale-90"
+                  >
+                    <Share2 size={18} />
                   </button>
 
                   <div className="absolute top-6 left-6">
