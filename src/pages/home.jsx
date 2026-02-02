@@ -1,26 +1,21 @@
-import React from 'react';
+ import React from 'react';
 import Hero from '../components/home/hero';
-import Trust from '../components/home/trust';
-import Bestsell from '../components/home/Bestsell';
-import OwnBy from '../components/home/ownby';
-import Collection from '../components/home/Collection';
-import Reviews from '../components/home/reviews';
-import CTA from '../components/home/cta';
+import CarAnimation from '../components/home/carAnimation'; 
+import Fleet from '../components/home/fleet';
+import Features from '../components/home/features';
+import Trust from '../components/home/Trust'; // Naya component import kiya
+import Booking from '../components/home/booking';
 
 const Home = () => {
   return (
-    <div className="bg-[#faf9f6]">
-      <main>
-        <Hero />
-        
-        <Bestsell />
-        <OwnBy />
-        <Collection />
-        <Reviews />
-        <Trust />
-        <CTA />
-      </main>
-    </div>
+    <main className="bg-black">
+      <Hero />
+      <CarAnimation /> 
+      <Fleet />
+      <Features />
+      <Trust /> {/* Booking se pehle Trust build karna better hai */}
+      <Booking />
+    </main>
   );
 };
 

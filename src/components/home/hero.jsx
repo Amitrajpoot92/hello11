@@ -1,180 +1,104 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ArrowRight, CirclePercent } from 'lucide-react';
+import React from 'react';
+import { Phone, MessageCircle, MapPin, Calendar, Search } from 'lucide-react';
+import bgVideo from '../../assets/cars/bgcar.mp4';
 
 const Hero = () => {
-  const navigate = useNavigate();
-
-  // Initial Fallback Rates (Bhopal/Bihar Market Jan 30, 2026 indicative)
-  const [rates, setRates] = useState([
-    { metal: "Diamond", price: "₹65,000", unit: "per carat", trend: "Market" },
-    { metal: "Gold (24K)", price: "₹17,062", unit: "per gram", trend: "Live" },
-    { metal: "Gold (18K)", price: "₹12,797", unit: "per gram", trend: "Live" },
-    { metal: "Silver", price: "₹395", unit: "per gram", trend: "Live" },
-  ]);
-
-  useEffect(() => {
-    const fetchLiveRates = async () => {
-      const today = new Date().toLocaleDateString();
-      const savedDate = localStorage.getItem('shree_laxmi_rate_date');
-      const savedRates = localStorage.getItem('shree_laxmi_rates');
-
-      if (savedDate === today && savedRates) {
-        setRates(JSON.parse(savedRates));
-        return;
-      }
-
-      try {
-        const myHeaders = new Headers();
-        myHeaders.append("x-access-token", "goldapi-c1v6w5sml0ot648-io");
-        myHeaders.append("Content-Type", "application/json");
-
-        const response = await fetch("https://www.goldapi.io/api/XAU/INR", {
-          method: 'GET',
-          headers: myHeaders,
-          redirect: 'follow'
-        });
-        
-        const result = await response.json();
-
-        if (result && result.price) {
-          // Indian Market Adjustment Factor (Approx 16% for Import Duty/Taxes)
-          const indiaAdjustment = 1.16; 
-
-          const newRates = [
-            { 
-              metal: "Diamond", 
-              price: "₹65,000", 
-              unit: "per carat", 
-              trend: "Market" 
-            },
-            { 
-              metal: "Gold (24K)", 
-              price: `₹${Math.round(result.price_gram_24k * indiaAdjustment).toLocaleString()}`, 
-              unit: "per gram", 
-              trend: "Live" 
-            },
-            { 
-              metal: "Gold (18K)", 
-              price: `₹${Math.round(result.price_gram_18k * indiaAdjustment).toLocaleString()}`, 
-              unit: "per gram", 
-              trend: "Live" 
-            },
-            { 
-              // Silver is highly volatile, setting to Bhopal/Bihar Jan 30 market rate
-              metal: "Silver", 
-              price: "₹395", 
-              unit: "per gram", 
-              trend: "Live" 
-            },
-          ];
-
-          localStorage.setItem('shree_laxmi_rates', JSON.stringify(newRates));
-          localStorage.setItem('shree_laxmi_rate_date', today);
-          setRates(newRates);
-        }
-      } catch (error) {
-        console.error("Live Rate Fetch Error:", error);
-      }
-    };
-
-    fetchLiveRates();
-  }, []);
-
   return (
-    <>
-      {/* Blinking Animation CSS */}
-      <style>
-        {`
-          @keyframes blink {
-            0% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1); }
-          }
-          .animate-blink {
-            animation: blink 1.5s infinite ease-in-out;
-          }
-        `}
-      </style>
+    <section className="relative min-h-screen md:h-screen w-full bg-[#0a0a0a] flex items-center overflow-hidden">
+      
+      {/* Background Subtle Gradient */}
+      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_30%,#fbbf2415_0%,transparent_50%)]" />
 
-      {/* --- HERO SECTION --- */}
-      <section className="relative h-screen flex items-center justify-center bg-[#1a1a1a] overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80" 
-            className="w-full h-full object-cover opacity-30 scale-105"
-            alt="Jewelry Background"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-transparent to-transparent"></div>
-        </div>
-        
-        <div className="relative z-10 text-center px-4 max-w-5xl">
-          <div className="inline-block mb-6">
-             <span className="px-6 py-2 border border-[#d3a12a] text-[#f5d54e] text-xs tracking-[0.5em] uppercase rounded-full bg-[#d3a12a]/10 backdrop-blur-sm">
-               The Royal Legacy
-             </span>
-          </div>
-          <h1 className="text-white text-5xl md:text-8xl font-serif mb-8 leading-[1.1]">
-            Unveiling <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d3a12a] via-[#f5d54e] to-[#d3a12a]">Eternal</span> <br/> Masterpieces
-          </h1>
-          <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
-            <button 
-              onClick={() => navigate('/collections')}
-              className="bg-[#d3a12a] shadow-[0_10px_30px_rgba(211,161,42,0.3)] text-[#1a1a1a] px-12 py-5 font-bold hover:bg-[#f5d54e] hover:-translate-y-1 transition-all duration-300 rounded-full tracking-wider"
-            >
-              VIEW COLLECTIONS
-            </button>
-            <button 
-              onClick={() => navigate('/about')}
-              className="group text-white py-2 flex items-center gap-3 text-lg font-light hover:text-[#f5d54e] transition-all"
-            >
-              Our Craft Story <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform"/>
-            </button>
-          </div>
-        </div>
-      </section>
+      <div className="relative z-10 container mx-auto px-6 py-12 md:py-0">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+          
+          {/* --- LEFT SIDE: Content & Chat (Desktop) | Bottom (Mobile) --- */}
+          {/* Mobile Order: 3 */}
+          <div className="w-full lg:w-1/2 order-3 lg:order-1 text-center lg:text-left">
+            <span className="inline-block px-3 py-1 mb-6 text-[11px] font-black tracking-[0.3em] text-black uppercase bg-yellow-400 rounded-sm">
+              Elite Transport
+            </span>
+            
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-none uppercase italic tracking-tighter mb-6">
+              Duri Pata <br /> 
+              <span className="text-yellow-400">Na Chale</span>
+            </h1>
+            
+            <p className="text-gray-400 text-lg md:text-xl max-w-lg mb-8 leading-relaxed mx-auto lg:mx-0">
+              Premium Khalilabad taxi service. Your comfort is our priority, every single mile.
+            </p>
 
-      {/* --- LIVE RATES CARD SECTION --- */}
-      <section id="rates" className="relative -mt-16 z-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="bg-white border-b-4 border-[#d3a12a] rounded-[2rem] p-1 shadow-2xl overflow-hidden">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-0 divide-y md:divide-y-0 md:divide-x divide-gray-100">
-              
-              <div className="p-8 text-center md:text-left bg-[#0f2d2a] flex flex-col justify-center">
-                <h3 className="text-[#f5d54e] text-xl font-bold flex items-center justify-center md:justify-start gap-2">
-                  <CirclePercent size={20}/> Live Rates
-                </h3>
-                <p className="text-white/60 text-[10px] uppercase tracking-widest mt-1">Updated Today</p>
-              </div>
-
-              {rates.map((item, index) => (
-                <div key={index} className="p-8 group hover:bg-[#faf9f6] transition-colors">
-                  <p className="text-gray-400 font-bold text-[10px] uppercase tracking-widest mb-2">{item.metal}</p>
-                  <div className="flex items-end gap-2">
-                    <p className="text-3xl font-black text-[#1a1a1a] group-hover:text-[#0f2d2a] transition-colors">{item.price}</p>
-                    
-                    {/* Blinking Green Light for Live Trends */}
-                    <div className="flex items-center gap-1.5 mb-1.5">
-                      {(item.trend === 'Live' || item.trend === 'Market') && (
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#0b9c42] animate-blink shadow-[0_0_8px_#0b9c42]"></div>
-                      )}
-                      <span className={`text-[10px] font-bold uppercase tracking-tighter ${item.trend === 'Live' || item.trend === 'Market' ? 'text-[#0b9c42]' : 'text-red-500'}`}>
-                        {item.trend}
-                      </span>
-                    </div>
-                  </div>
-                  <p className="text-[10px] text-gray-400 mt-1">{item.unit}</p>
-                </div>
-              ))}
+            {/* Chat/Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <a 
+                href="https://wa.me/91XXXXXXXXXX"
+                className="flex items-center justify-center gap-3 bg-yellow-400 text-black px-8 py-4 rounded-xl font-black hover:scale-105 transition-all shadow-xl"
+              >
+                <MessageCircle size={20} />
+                Chat on WhatsApp
+              </a>
+              <a 
+                href="tel:+91XXXXXXXXXX"
+                className="flex items-center justify-center gap-3 bg-white/5 backdrop-blur-md text-white px-8 py-4 rounded-xl font-bold border border-white/10 hover:bg-white/10 transition-all"
+              >
+                <Phone size={20} className="text-yellow-400" />
+                Quick Call
+              </a>
             </div>
           </div>
-          {/* Note for GST - Crucial for Indian Transparency */}
-          <p className="text-center text-gray-400 text-[9px] mt-4 uppercase tracking-[0.2em]">
-            * Rates are indicative and exclude 3% GST and making charges.
-          </p>
+
+          {/* --- RIGHT SIDE: Search & Video --- */}
+          <div className="w-full lg:w-5/12 flex flex-col gap-6 order-1 lg:order-2">
+            
+            {/* 1. Search Bar / Booking Card (Mobile Order: 1) */}
+            <div className="bg-white/[0.03] backdrop-blur-xl border border-white/10 p-6 rounded-3xl shadow-2xl order-1">
+              <div className="grid grid-cols-1 gap-4">
+                <div className="relative">
+                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 text-yellow-400" size={18} />
+                  <input 
+                    type="text" 
+                    placeholder="Pickup Location" 
+                    className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-10 pr-4 text-white placeholder:text-gray-500 focus:outline-none focus:border-yellow-400 transition-colors"
+                  />
+                </div>
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-yellow-400" size={18} />
+                  <input 
+                    type="text" 
+                    placeholder="Where to?" 
+                    className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-10 pr-4 text-white placeholder:text-gray-500 focus:outline-none focus:border-yellow-400 transition-colors"
+                  />
+                </div>
+                <button className="w-full bg-yellow-400 text-black font-black py-4 rounded-xl hover:bg-yellow-500 transition-colors shadow-lg uppercase tracking-wider">
+                  Find Best Ride
+                </button>
+              </div>
+            </div>
+
+            {/* 2. Video Frame (Mobile Order: 2) */}
+            <div className="relative w-full aspect-video lg:aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl order-2">
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              >
+                <source src={bgVideo} type="video/mp4" />
+              </video>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute bottom-4 left-4">
+                <span className="flex items-center gap-2 text-white text-xs font-bold uppercase tracking-widest bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/10">
+                  <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse" /> Live Fleet
+                </span>
+              </div>
+            </div>
+
+          </div>
+
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
 

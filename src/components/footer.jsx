@@ -1,143 +1,87 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { MapPin, Phone, Instagram, ShieldCheck, ExternalLink, ChevronRight, MessageCircle } from 'lucide-react';
+import { Facebook, Instagram, Twitter, Mail, MapPin, Phone, ArrowUpRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const Footer = () => {
-  const navigate = useNavigate();
-  const wpNumber = "8873873269";
-
-  // Social Media Redirection Logic
-  const socialLinks = {
-    instagram: "https://www.instagram.com/shree_laxmi_jewellers_and_sons?igsh=MWIyMGZqem9hMnQ4eQ==",
-    whatsapp: `https://wa.me/91${wpNumber}`
-  };
-
-  const handleSocialClick = (url) => {
-    if (url) window.open(url, "_blank");
-  };
-
   return (
-    <footer className="bg-[#1a1a1a] text-white pt-16 pb-32 md:pb-12 border-t border-[#d3a12a]/30 relative overflow-hidden">
-      
-      {/* Background Decor for Mobile Feel */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#d3a12a]/50 to-transparent"></div>
+    <footer className="bg-black text-white pt-20 pb-10 px-6 border-t border-white/5 relative overflow-hidden">
+      {/* Background Glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[200px] bg-yellow-400/5 blur-[120px] rounded-full pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+      <div className="container mx-auto max-w-6xl">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
           
-          {/* 1. Brand Section */}
-          <div className="text-center md:text-left">
-            <h2 className="text-[#d3a12a] text-2xl font-serif font-bold mb-4 uppercase tracking-tighter">
-              Shree Laxmi <span className="text-white block md:inline">Jewellers & Sons</span>
-            </h2>
-            <p className="text-gray-500 text-[11px] leading-relaxed mb-8 max-w-xs mx-auto md:mx-0">
-              Defining purity and heritage since 2002. Every piece tells a story of craftsmanship.
+          {/* Brand Identity */}
+          <div className="md:col-span-2">
+            <h3 className="text-4xl font-black italic tracking-tighter mb-6">
+              HELLO<span className="text-yellow-400">11</span>
+            </h3>
+            <p className="text-gray-500 text-sm leading-relaxed max-w-xs mb-8 font-medium uppercase tracking-tight">
+              Redefining premium travel across Uttar Pradesh & Bihar. 
+              The gold standard of Khalilabad's elite taxi service.
             </p>
-            
-            {/* Social Icons - WhatsApp & Instagram Only */}
-            <div className="flex justify-center md:justify-start gap-5">
-              <button 
-                onClick={() => handleSocialClick(socialLinks.whatsapp)}
-                className="w-12 h-12 rounded-2xl border border-white/5 bg-white/5 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all duration-300 active:scale-90"
-                title="WhatsApp"
-              >
-                <MessageCircle size={22} />
-              </button>
-              <button 
-                onClick={() => handleSocialClick(socialLinks.instagram)}
-                className="w-12 h-12 rounded-2xl border border-white/5 bg-white/5 flex items-center justify-center hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:via-[#ee2a7b] hover:to-[#6228d7] hover:text-white transition-all duration-300 active:scale-90"
-                title="Instagram"
-              >
-                <Instagram size={22} />
-              </button>
+            <div className="flex gap-4">
+              {[Facebook, Instagram, Twitter].map((Icon, i) => (
+                <motion.a 
+                  key={i}
+                  whileHover={{ y: -5, color: '#facc15' }}
+                  href="#" 
+                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 transition-colors"
+                >
+                  <Icon size={18} />
+                </motion.a>
+              ))}
             </div>
           </div>
 
-          {/* 2. Navigation */}
-          <div className="grid grid-cols-2 md:grid-cols-2 gap-8 md:col-span-2">
-            <div className="text-left">
-              <h3 className="text-[#f5d54e] font-bold uppercase tracking-widest text-[10px] mb-6 opacity-50">Navigation</h3>
-              <ul className="space-y-4 text-gray-300 text-[11px] font-bold tracking-widest uppercase">
-                <li><button onClick={() => navigate('/')} className="flex items-center gap-2 hover:text-[#d3a12a] transition-all"><ChevronRight size={10} className="text-[#d3a12a]"/> Home</button></li>
-                <li><button onClick={() => navigate('/signature')} className="flex items-center gap-2 hover:text-[#d3a12a] transition-all"><ChevronRight size={10} className="text-[#d3a12a]"/> Signature</button></li>
-                <li><button onClick={() => navigate('/collections')} className="flex items-center gap-2 hover:text-[#d3a12a] transition-all"><ChevronRight size={10} className="text-[#d3a12a]"/> Collection</button></li>
-                <li><button onClick={() => navigate('/about')} className="flex items-center gap-2 hover:text-[#d3a12a] transition-all"><ChevronRight size={10} className="text-[#d3a12a]"/> About</button></li>
-              </ul>
-            </div>
-            <div className="text-left">
-              <h3 className="text-[#f5d54e] font-bold uppercase tracking-widest text-[10px] mb-6 opacity-50">Legal</h3>
-              <ul className="space-y-4 text-gray-400 text-[11px] uppercase tracking-widest">
-                <li><a href="#" className="hover:text-white transition-all">Privacy</a></li>
-                <li><a href="#" className="hover:text-white transition-all">Terms</a></li>
-                <li><a href="#" className="hover:text-white transition-all">Returns</a></li>
-              </ul>
-            </div>
+          {/* Quick Links */}
+          <div>
+            <h4 className="text-white font-black uppercase italic tracking-widest text-xs mb-6">Navigation</h4>
+            <ul className="space-y-4">
+              {['Privacy Policy', 'Terms of Service', 'Refund Policy', 'Contact Support'].map((link) => (
+                <li key={link}>
+                  <a href="#" className="text-gray-500 hover:text-yellow-400 text-xs font-bold uppercase tracking-wider flex items-center gap-2 group transition-colors">
+                    <span className="w-0 group-hover:w-2 h-[1px] bg-yellow-400 transition-all" />
+                    {link}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          {/* 3. Contact Card */}
-          <div className="bg-gradient-to-br from-[#0f2d2a] to-[#071a18] p-8 rounded-[2.5rem] border border-[#d3a12a]/20 shadow-2xl relative overflow-hidden group">
-            <div className="absolute -top-6 -right-6 p-4 opacity-5 rotate-12">
-               <ShieldCheck size={120} className="text-white" />
-            </div>
-            
-            <h3 className="text-[#f5d54e] font-bold mb-6 text-[10px] uppercase tracking-widest text-left">Visit Our Store</h3>
-            
-            <div className="space-y-6 relative z-10 text-left">
-              <div className="flex items-start gap-4 text-gray-300 group/loc">
-                <div className="w-8 h-8 rounded-full bg-[#d3a12a]/10 flex items-center justify-center shrink-0">
-                  <MapPin className="text-[#d3a12a]" size={16} />
-                </div>
-                <p className="text-[11px] leading-relaxed group-hover:text-white transition-colors">
-                  Mandir Road, Mairwa <br/> Siwan (Bihar) - 841239
+          {/* Direct Contact */}
+          <div>
+            <h4 className="text-white font-black uppercase italic tracking-widest text-xs mb-6">Location</h4>
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <MapPin size={18} className="text-yellow-400 mt-1" />
+                <p className="text-gray-500 text-xs font-bold uppercase leading-relaxed">
+                  Khalilabad, Sant Kabir Nagar<br />Uttar Pradesh - 272175
                 </p>
               </div>
-
-              <a 
-                href={`tel:+91${wpNumber}`} 
-                className="flex items-center gap-4 text-gray-300 group/phone active:scale-95 transition-transform"
-              >
-                <div className="w-8 h-8 rounded-full bg-[#0b9c42]/20 flex items-center justify-center shrink-0 animate-pulse">
-                  <Phone className="text-[#0b9c42]" size={16} />
-                </div>
-                <div>
-                  <p className="text-[11px] font-black tracking-widest">+91 {wpNumber.slice(0,5)} {wpNumber.slice(5)}</p>
-                  <p className="text-[8px] text-[#0b9c42] uppercase font-bold tracking-tighter">Tap to call now</p>
-                </div>
-              </a>
-            </div>
-
-            <div className="mt-8 pt-5 border-t border-white/5">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-[#f5d54e] animate-ping"></div>
-                <span className="text-[9px] font-bold text-[#f5d54e] uppercase tracking-widest">BIS 916 Hallmarked Store</span>
+              <div className="flex items-center gap-3">
+                <Mail size={18} className="text-yellow-400" />
+                <p className="text-gray-500 text-xs font-bold uppercase">support@hello11.in</p>
               </div>
+              <motion.div 
+                whileHover={{ x: 5 }}
+                className="inline-flex items-center gap-2 text-yellow-400 font-black text-xs uppercase tracking-[0.2em] border-b border-yellow-400/30 pb-1 cursor-pointer"
+              >
+                Get Directions <ArrowUpRight size={14} />
+              </motion.div>
             </div>
           </div>
-
         </div>
 
-        {/* 4. Bottom Branding Area */}
-        <div className="mt-20 pt-10 border-t border-white/5 flex flex-col items-center gap-8">
-          
-          <div className="text-center space-y-2">
-            <p className="text-[9px] text-gray-600 uppercase tracking-[0.4em]">
-              &copy; {new Date().getFullYear()} Shree Laxmi Jewellers.
-            </p>
+        {/* Bottom Bar */}
+        <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-gray-600 text-[10px] font-black uppercase tracking-[0.3em]">
+            © 2026 Hello11. Built for the Elite.
+          </p>
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+            <span className="text-gray-600 text-[10px] font-black uppercase tracking-[0.2em]">All Systems Operational</span>
           </div>
-
-          <a 
-            href="https://www.codewebx.in/" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="group relative flex flex-col items-center p-4 rounded-3xl transition-all duration-500"
-          >
-            <span className="text-[8px] text-yellow-500 uppercase tracking-[0.5em] mb-2 group-hover:text-[#d3a12a] transition-colors">Developed & Managed By</span>
-            <div className="flex items-center gap-2 bg-white/[0.03] px-6 py-3 rounded-2xl border border-white/5 group-hover:border-[#d3a12a]/30 group-hover:bg-[#d3a12a]/5 transition-all">
-               <span className="text-white font-black text-lg tracking-tighter group-hover:text-[#d3a12a] transition-colors italic">CODEWEBX</span>
-               <div className="w-1.5 h-1.5 rounded-full bg-[#d3a12a] shadow-[0_0_10px_#d3a12a]"></div>
-               <ExternalLink size={12} className="text-gray-700 group-hover:text-white ml-2" />
-            </div>
-          </a>
         </div>
       </div>
     </footer>

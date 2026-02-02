@@ -1,58 +1,45 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // Layout Components
-import Header from './components/header.jsx';
-import Footer from './components/footer.jsx';
+import Header from './components/header';
+import Footer from './components/footer';
 
-// Page Components
-import Home from './pages/home.jsx';
-import Signature from './pages/Signature.jsx';
-import Collections from './pages/collections.jsx';
-import About from './pages/about.jsx';
-
-// ScrollToTop Component: Automatically scrolls to top on route change
-const ScrollToTop = () => {
-  const { pathname } = useLocation();
-  
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-
-  return null;
-};
+// Pages
+import Home from './pages/home';
+import Ride from './pages/ride';
+import Rent from './pages/rent';
+import About from './pages/about';
 
 function App() {
   return (
     <Router>
-      <ScrollToTop />
-      {/* Main wrapper with Flexbox to keep Footer at bottom */}
-      <div className="min-h-screen flex flex-col bg-[#faf9f6]">
+      <div className="min-h-screen bg-black flex flex-col selection:bg-yellow-400 selection:text-black">
         
-        {/* Persistent Navigation Header */}
+        {/* Header fixed hai, navigation handle karta hai */}
         <Header />
 
-        {/* Dynamic Content Area */}
+        {/* Main Content Area */}
         <main className="flex-grow">
           <Routes>
-            {/* Landing Page */}
+            {/* 1. Home Page Route */}
             <Route path="/" element={<Home />} />
-            
-            {/* Signature Gallery Page */}
-            <Route path="/signature" element={<Signature />} />
-            
-            {/* Product Catalog Page */}
-            <Route path="/collections" element={<Collections />} />
-            
-            {/* Heritage Story Page */}
+
+            {/* 2. Ride Page Route (Pickup/Drop/Local) */}
+            <Route path="/ride" element={<Ride />} />
+
+            {/* 3. Rent Page Route (Self-Drive/Rental) */}
+            <Route path="/rent" element={<Rent />} />
+
+            {/* 4. About Page Route (Our Story/Legacy) */}
             <Route path="/about" element={<About />} />
             
-            {/* Catch-all: Redirects to Home */}
+            {/* Optional: Agar koi galat URL daale toh Home par bhej do */}
             <Route path="*" element={<Home />} />
           </Routes>
         </main>
 
-        {/* Global Footer */}
+        {/* Footer bottom mein rahega */}
         <Footer />
         
       </div>
