@@ -1,6 +1,6 @@
  import React from 'react';
 import Hero from '../components/home/hero';
-import CarAnimation from '../components/home/carAnimation'; 
+import CarAnimation from '../components/home/CarAnimation'; 
 import Fleet from '../components/home/fleet';
 import Features from '../components/home/features';
 import Trust from '../components/home/Trust'; // Naya component import kiya

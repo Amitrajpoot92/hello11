@@ -82,7 +82,7 @@ const CarAnimation = () => {
         </div>
 
         {/* Car Image with your 270deg rotation */}
-        <div className="relative rotate-[180deg]">
+        <div className="relative rotate-[360deg]">
           <img 
             src="/src/assets/cars/bluecar4.webp" 
             alt="Hello11 Car"
