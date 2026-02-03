@@ -2,12 +2,20 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, ArrowRight, Clock, Star, ShieldCheck, Zap } from 'lucide-react';
 
+// --- IMAGES IMPORT (Correct Way) ---
+import car1 from '../assets/cars/car1.webp';
+import car2 from '../assets/cars/car2.webp';
+import car3 from '../assets/cars/car3.webp';
+import car4 from '../assets/cars/car4.webp';
+import car5 from '../assets/cars/car5.webp';
+import car6 from '../assets/cars/car6.webp';
+
 const rideCategories = [
   {
     id: 'local',
     title: "Local Ride",
     desc: "Within Khalilabad City",
-    img: "/car1.webp", // Path to your car images
+    img: car1, // Imported variable use kiya
     price: "Starts @ ₹199",
     color: "from-yellow-400 to-orange-500"
   },
@@ -15,7 +23,7 @@ const rideCategories = [
     id: 'outstation',
     title: "Outstation",
     desc: "Lucknow, GKP, Basti & More",
-    img: "/car2.webp",
+    img: car2,
     price: "Starts @ ₹9/km",
     color: "from-blue-500 to-cyan-400"
   },
@@ -23,7 +31,7 @@ const rideCategories = [
     id: 'hourly',
     title: "Hourly Rental",
     desc: "Book for 4, 8, or 12 hours",
-    img: "/car3.webp",
+    img: car3,
     price: "Starts @ ₹899",
     color: "from-purple-500 to-pink-500"
   }
@@ -32,11 +40,18 @@ const rideCategories = [
 const Ride = () => {
   const [selected, setSelected] = useState('local');
 
+  // Function to get the large car image based on selection
+  const getHeroImage = () => {
+    if (selected === 'local') return car4;
+    if (selected === 'outstation') return car5;
+    return car6;
+  };
+
   return (
     <div className="bg-black min-h-screen pt-28 pb-20 px-6">
       <div className="container mx-auto max-w-6xl">
         
-        {/* Header - Minimal & Visual */}
+        {/* Header */}
         <div className="mb-12">
           <h1 className="text-5xl md:text-8xl font-black text-white italic uppercase tracking-tighter leading-none">
             SELECT <br /> <span className="text-yellow-400">YOUR RIDE</span>
@@ -54,7 +69,7 @@ const Ride = () => {
               whileHover={{ y: -10 }}
               onClick={() => setSelected(cat.id)}
               className={`relative overflow-hidden rounded-[2.5rem] p-8 cursor-pointer transition-all duration-500 border-2 ${
-                selected === cat.id ? 'border-yellow-400 bg-white/5' : 'border-white/5 bg-[#0c0c0c]'
+                selected === cat.id ? 'border-yellow-400 bg-white/5 shadow-[0_0_30px_rgba(250,204,21,0.1)]' : 'border-white/5 bg-[#0c0c0c]'
               }`}
             >
               <div className="relative z-10">
@@ -65,14 +80,15 @@ const Ride = () => {
                 <div className="mt-6 text-white font-bold text-lg">{cat.price}</div>
               </div>
 
-              {/* Background Car Image Animation */}
+              {/* Background Car Image */}
               <motion.img 
                 src={cat.img} 
                 alt={cat.title}
-                className={`absolute bottom-0 -right-4 w-48 h-auto object-contain opacity-20 grayscale group-hover:grayscale-0 group-hover:opacity-40 transition-all duration-700 ${selected === cat.id ? 'opacity-60 scale-110 grayscale-0' : ''}`}
+                className={`absolute bottom-0 -right-4 w-48 h-auto object-contain transition-all duration-700 pointer-events-none ${
+                  selected === cat.id ? 'opacity-70 scale-110 grayscale-0' : 'opacity-20 grayscale'
+                }`}
               />
               
-              {/* Active Indicator Glow */}
               {selected === cat.id && (
                 <div className={`absolute inset-0 bg-gradient-to-br ${cat.color} opacity-5 blur-3xl`} />
               )}
@@ -85,59 +101,57 @@ const Ride = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             
             {/* Left: Graphic Visual */}
-            <div className="relative">
-              <div className="absolute -top-10 -left-10 w-40 h-40 bg-yellow-400/10 blur-[80px] rounded-full" />
-              <motion.img 
-                key={selected}
-                initial={{ x: 100, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                src={selected === 'local' ? '/car4.webp' : selected === 'outstation' ? '/car5.webp' : '/car6.webp'}
-                className="w-full h-auto object-contain relative z-10"
-              />
-              <div className="mt-8 flex justify-center gap-8">
-                <div className="text-center">
-                  <ShieldCheck className="text-yellow-400 mx-auto mb-2" size={24} />
-                  <p className="text-[9px] text-gray-500 font-black uppercase tracking-widest">Safe Ride</p>
-                </div>
-                <div className="text-center">
-                  <Zap className="text-yellow-400 mx-auto mb-2" size={24} />
-                  <p className="text-[9px] text-gray-500 font-black uppercase tracking-widest">Quick ETA</p>
-                </div>
-                <div className="text-center">
-                  <Star className="text-yellow-400 mx-auto mb-2" size={24} />
-                  <p className="text-[9px] text-gray-500 font-black uppercase tracking-widest">Top Rated</p>
-                </div>
-              </div>
+            <div className="relative h-64 flex items-center justify-center">
+              <div className="absolute inset-0 bg-yellow-400/5 blur-[100px] rounded-full" />
+              <AnimatePresence mode="wait">
+                <motion.img 
+                  key={selected}
+                  initial={{ x: 50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  exit={{ x: -50, opacity: 0 }}
+                  transition={{ duration: 0.4 }}
+                  src={getHeroImage()}
+                  className="w-full h-full object-contain relative z-10"
+                />
+              </AnimatePresence>
             </div>
 
             {/* Right: Quick Action Form */}
             <div className="flex flex-col gap-6">
               <div className="space-y-4">
                 <div className="bg-white/5 p-4 rounded-2xl border border-white/10">
-                   <p className="text-[10px] text-yellow-400 font-bold uppercase tracking-widest mb-2">Selected Mode</p>
+                   <p className="text-[10px] text-yellow-400 font-bold uppercase tracking-widest mb-2">Service Type</p>
                    <h4 className="text-white text-3xl font-black italic uppercase tracking-tighter">
-                     {selected} Service
+                     {selected} package
                    </h4>
                 </div>
 
                 <div className="grid grid-cols-1 gap-3">
-                  <div className="flex items-center gap-4 bg-white/[0.02] p-5 rounded-2xl border border-white/5">
+                  <div className="flex items-center gap-4 bg-white/[0.03] p-5 rounded-2xl border border-white/5 group hover:border-yellow-400/30 transition-all">
                     <MapPin className="text-yellow-400" size={20} />
-                    <span className="text-gray-400 text-sm font-medium italic">Enter Pickup Point...</span>
+                    <input 
+                      type="text" 
+                      placeholder="Pickup Point (e.g. KLD Station)" 
+                      className="bg-transparent border-none outline-none text-white text-sm w-full placeholder:text-gray-600 italic"
+                    />
                   </div>
-                  <div className="flex items-center gap-4 bg-white/[0.02] p-5 rounded-2xl border border-white/5">
+                  <div className="flex items-center gap-4 bg-white/[0.03] p-5 rounded-2xl border border-white/5 group hover:border-yellow-400/30 transition-all">
                     <Clock className="text-yellow-400" size={20} />
-                    <span className="text-gray-400 text-sm font-medium italic">Select Date & Time...</span>
+                    <input 
+                      type="text" 
+                      placeholder="Pickup Time" 
+                      className="bg-transparent border-none outline-none text-white text-sm w-full placeholder:text-gray-600 italic"
+                    />
                   </div>
                 </div>
               </div>
 
               <motion.button 
-                whileHover={{ scale: 1.02 }}
+                whileHover={{ scale: 1.02, backgroundColor: '#ffffff', color: '#000000' }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full bg-yellow-400 py-6 rounded-2xl text-black font-black uppercase tracking-[0.2em] flex items-center justify-center gap-3 shadow-[0_20px_40px_rgba(250,204,21,0.2)]"
+                className="w-full bg-yellow-400 py-6 rounded-2xl text-black font-black uppercase tracking-[0.2em] flex items-center justify-center gap-3 shadow-[0_20px_40px_rgba(250,204,21,0.2)] transition-all duration-300"
               >
-                Confirm {selected} Booking <ArrowRight size={20} strokeWidth={3} />
+                Book {selected} Now <ArrowRight size={20} strokeWidth={3} />
               </motion.button>
             </div>
 
