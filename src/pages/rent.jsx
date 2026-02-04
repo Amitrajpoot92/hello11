@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { Users, Fuel, Gauge, ChevronRight } from 'lucide-react';
 
 // --- IMAGES IMPORT (Correct Path Fix) ---
+// Yahan ../ use karein kyunki rent.jsx "src/pages" mein hai 
+// aur assets "src/assets" mein. Toh sirf ek level piche jaana hai.
 import car1 from '../assets/cars/car1.webp';
 import car2 from '../assets/cars/car2.webp';
 import car3 from '../assets/cars/car3.webp';

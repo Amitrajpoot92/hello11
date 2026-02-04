@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, ArrowRight, Clock, Star, ShieldCheck, Zap } from 'lucide-react';
 
-// --- IMAGES IMPORT (Correct Way) ---
+// --- IMAGES IMPORT (Correct Path for Pages) ---
+// Note: Pages folder se assets tak jaane ke liye ../ kaafi hai
 import car1 from '../assets/cars/car1.webp';
 import car2 from '../assets/cars/car2.webp';
 import car3 from '../assets/cars/car3.webp';
@@ -15,7 +16,7 @@ const rideCategories = [
     id: 'local',
     title: "Local Ride",
     desc: "Within Khalilabad City",
-    img: car1, // Imported variable use kiya
+    img: car1, 
     price: "Starts @ ₹199",
     color: "from-yellow-400 to-orange-500"
   },

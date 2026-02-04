@@ -1,6 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+// Image ko import karein taaki Vite deployment ke waqt iska path fix kar sake
+import blueCar from '../../assets/cars/bluecar4.webp';
+
 const CarAnimation = () => {
   const letters = "HELLO".split("");
   const numbers = "11".split("");
@@ -81,10 +84,10 @@ const CarAnimation = () => {
           ></div>
         </div>
 
-        {/* Car Image with your 270deg rotation */}
+        {/* Car Image with imported source */}
         <div className="relative rotate-[360deg]">
           <img 
-            src="/src/assets/cars/bluecar4.webp" 
+            src={blueCar} 
             alt="Hello11 Car"
             className="w-full h-auto drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)] scale-110 md:scale-125"
           />

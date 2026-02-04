@@ -1,89 +1,126 @@
 import React from 'react';
-import { Facebook, Instagram, Twitter, Mail, MapPin, Phone, ArrowUpRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Facebook, Instagram, Twitter, Mail, MapPin, Home, Car, Key, User } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Footer = () => {
+  const navigate = useNavigate();
+
+  const navLinks = [
+    { name: 'Home', path: '/', icon: <Home size={12} /> },
+    { name: 'Ride', path: '/ride', icon: <Car size={12} /> },
+    { name: 'Rent', path: '/rent', icon: <Key size={12} /> },
+    { name: 'About', path: '/about', icon: <User size={12} /> },
+  ];
+
   return (
-    <footer className="bg-black text-white pt-20 pb-10 px-6 border-t border-white/5 relative overflow-hidden">
+    <footer className="bg-black text-white pt-8 pb-24 md:pb-10 px-6 border-t border-white/5 relative overflow-hidden">
       {/* Background Glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[200px] bg-yellow-400/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[200px] md:w-[500px] h-[100px] bg-yellow-400/5 blur-[80px] rounded-full pointer-events-none" />
 
-      <div className="container mx-auto max-w-6xl">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
+      <div className="container mx-auto max-w-6xl relative z-10">
+        
+        {/* 1. Company Name - Center aligned for all views */}
+        <div className="text-center mb-8 md:mb-12">
+          <h3 
+            className="text-3xl md:text-5xl font-black italic tracking-tighter cursor-pointer inline-block group" 
+            onClick={() => navigate('/')}
+          >
+            HELLO<span className="text-yellow-400 group-hover:text-white transition-colors duration-300">11</span>
+          </h3>
+          <p className="text-gray-600 text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] mt-1">
+            The Gold Standard of Khalilabad
+          </p>
+        </div>
+
+        {/* 2. Main Content Grid - 2 Columns on Mobile */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 mb-10">
           
-          {/* Brand Identity */}
-          <div className="md:col-span-2">
-            <h3 className="text-4xl font-black italic tracking-tighter mb-6">
-              HELLO<span className="text-yellow-400">11</span>
-            </h3>
-            <p className="text-gray-500 text-sm leading-relaxed max-w-xs mb-8 font-medium uppercase tracking-tight">
-              Redefining premium travel across Uttar Pradesh & Bihar. 
-              The gold standard of Khalilabad's elite taxi service.
-            </p>
-            <div className="flex gap-4">
-              {[Facebook, Instagram, Twitter].map((Icon, i) => (
-                <motion.a 
-                  key={i}
-                  whileHover={{ y: -5, color: '#facc15' }}
-                  href="#" 
-                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 transition-colors"
-                >
-                  <Icon size={18} />
-                </motion.a>
-              ))}
-            </div>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-white font-black uppercase italic tracking-widest text-xs mb-6">Navigation</h4>
-            <ul className="space-y-4">
-              {['Privacy Policy', 'Terms of Service', 'Refund Policy', 'Contact Support'].map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-gray-500 hover:text-yellow-400 text-xs font-bold uppercase tracking-wider flex items-center gap-2 group transition-colors">
-                    <span className="w-0 group-hover:w-2 h-[1px] bg-yellow-400 transition-all" />
-                    {link}
-                  </a>
+          {/* Navigation Column */}
+          <div className="flex flex-col items-center md:items-start">
+            <h4 className="text-white font-black uppercase italic tracking-widest text-[9px] mb-4 border-b border-yellow-400/30 pb-1 w-full text-center md:text-left">
+              Navigation
+            </h4>
+            <ul className="space-y-3 w-full">
+              {navLinks.map((link) => (
+                <li key={link.name}>
+                  <button 
+                    onClick={() => navigate(link.path)}
+                    className="text-gray-500 hover:text-yellow-400 text-[10px] font-bold uppercase tracking-wider flex items-center justify-center md:justify-start gap-2 group transition-all w-full"
+                  >
+                    <span className="text-yellow-400/30 group-hover:text-yellow-400 transition-colors">
+                      {link.icon}
+                    </span>
+                    {link.name}
+                  </button>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Direct Contact */}
-          <div>
-            <h4 className="text-white font-black uppercase italic tracking-widest text-xs mb-6">Location</h4>
-            <div className="space-y-4">
-              <div className="flex items-start gap-3">
-                <MapPin size={18} className="text-yellow-400 mt-1" />
-                <p className="text-gray-500 text-xs font-bold uppercase leading-relaxed">
-                  Khalilabad, Sant Kabir Nagar<br />Uttar Pradesh - 272175
-                </p>
+          {/* Reach Us Column */}
+          <div className="flex flex-col items-center md:items-start">
+            <h4 className="text-white font-black uppercase italic tracking-widest text-[9px] mb-4 border-b border-yellow-400/30 pb-1 w-full text-center md:text-left">
+              Reach Us
+            </h4>
+            <div className="space-y-4 w-full">
+              <div className="flex flex-col md:flex-row items-center md:items-start gap-1 md:gap-3 group">
+                <MapPin size={14} className="text-yellow-400 shrink-0" />
+                <span className="text-gray-500 text-[9px] font-bold uppercase text-center md:text-left">Khalilabad, UP</span>
               </div>
-              <div className="flex items-center gap-3">
-                <Mail size={18} className="text-yellow-400" />
-                <p className="text-gray-500 text-xs font-bold uppercase">support@hello11.in</p>
+              <div className="flex flex-col md:flex-row items-center md:items-start gap-1 md:gap-3 group">
+                <Mail size={14} className="text-yellow-400 shrink-0" />
+                <span className="text-gray-500 text-[9px] font-bold uppercase text-center md:text-left">support@hello11.in</span>
               </div>
-              <motion.div 
-                whileHover={{ x: 5 }}
-                className="inline-flex items-center gap-2 text-yellow-400 font-black text-xs uppercase tracking-[0.2em] border-b border-yellow-400/30 pb-1 cursor-pointer"
-              >
-                Get Directions <ArrowUpRight size={14} />
-              </motion.div>
+            </div>
+          </div>
+
+          {/* Socials - Desktop only visible in grid, Mobile moves below */}
+          <div className="hidden md:flex flex-col items-start">
+            <h4 className="text-white font-black uppercase italic tracking-widest text-[9px] mb-4 border-b border-yellow-400/30 pb-1 w-full">
+              Follow Us
+            </h4>
+            <div className="flex gap-4">
+              {[Facebook, Instagram, Twitter].map((Icon, i) => (
+                <motion.a 
+                  key={i}
+                  whileHover={{ y: -3, color: '#facc15' }}
+                  href="#" 
+                  className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 transition-all"
+                >
+                  <Icon size={16} />
+                </motion.a>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-600 text-[10px] font-black uppercase tracking-[0.3em]">
-            © 2026 Hello11. Built for the Elite.
-          </p>
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            <span className="text-gray-600 text-[10px] font-black uppercase tracking-[0.2em]">All Systems Operational</span>
+        {/* 3. Mobile Socials & Copyright - Bottom Section */}
+        <div className="border-t border-white/5 pt-8 flex flex-col items-center gap-6">
+          {/* Socials for Mobile */}
+          <div className="flex md:hidden gap-6">
+            {[Facebook, Instagram, Twitter].map((Icon, i) => (
+              <a key={i} href="#" className="text-gray-500 hover:text-yellow-400 transition-colors">
+                <Icon size={20} />
+              </a>
+            ))}
+          </div>
+
+          <div className="flex flex-col md:flex-row justify-between items-center w-full gap-4">
+            <p className="text-gray-600 text-[8px] md:text-[9px] font-black uppercase tracking-[0.3em]">
+              © 2026 HELLO11. Built for the Elite.
+            </p>
+            <div className="flex items-center gap-2 bg-white/5 px-3 py-1 rounded-full border border-white/5">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+              <span className="text-gray-600 text-[8px] font-black uppercase tracking-[0.1em]">All Systems Live</span>
+            </div>
           </div>
         </div>
+
       </div>
+
+      {/* Spacer for Floating Mobile Nav */}
+      <div className="h-8 md:hidden" />
     </footer>
   );
 };
