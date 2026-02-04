@@ -2,9 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Users, Fuel, Gauge, ChevronRight } from 'lucide-react';
 
-// --- IMAGES IMPORT (Correct Path Fix) ---
-// Yahan ../ use karein kyunki rent.jsx "src/pages" mein hai 
-// aur assets "src/assets" mein. Toh sirf ek level piche jaana hai.
+// --- IMAGES IMPORT ---
 import car1 from '../assets/cars/car1.webp';
 import car2 from '../assets/cars/car2.webp';
 import car3 from '../assets/cars/car3.webp';
@@ -23,21 +21,27 @@ const cars = [
 
 const Rent = () => {
   return (
-    <div className="bg-black min-h-screen pt-28 pb-32 px-6">
+    <div className="bg-[#f8f9fa] min-h-screen pt-20 md:pt-32 pb-16 px-4 md:px-6">
       <div className="container mx-auto max-w-6xl">
         
         {/* Page Header */}
-        <div className="mb-12">
-          <h1 className="text-6xl md:text-8xl font-black text-white italic uppercase tracking-tighter leading-none">
-            Elite <span className="text-yellow-400">Fleet</span>
+        <div className="mb-8 md:mb-12 px-2">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="h-[2px] w-8 md:w-12 bg-yellow-500"></div>
+            <span className="text-yellow-600 font-bold tracking-[0.3em] text-[10px] uppercase">
+              Self Drive
+            </span>
+          </div>
+          <h1 className="text-5xl md:text-8xl font-black text-black leading-none tracking-tighter uppercase italic">
+            ELITE <span className="text-yellow-500">FLEET</span>
           </h1>
-          <p className="text-gray-500 font-bold uppercase tracking-[0.3em] text-[10px] mt-2 border-l-2 border-yellow-400 pl-4">
-            Pick your beast for the road
+          <p className="text-gray-400 font-bold uppercase tracking-widest text-[9px] md:text-xs mt-3">
+            Premium selection for your next journey
           </p>
         </div>
 
         {/* Cars Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {cars.map((car) => (
             <motion.div 
               key={car.id}
@@ -45,49 +49,53 @@ const Rent = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               whileHover={{ y: -10 }}
-              className="bg-[#0c0c0c] border border-white/5 rounded-[2.5rem] p-6 group transition-all duration-500 hover:border-yellow-400/20 shadow-2xl"
+              className="bg-white border-2 border-yellow-400 rounded-[2rem] md:rounded-[2.5rem] p-5 md:p-7 group transition-all duration-500 shadow-lg hover:shadow-2xl"
             >
-              {/* Image Container with Glow Effect */}
-              <div className="relative h-48 mb-6 overflow-hidden flex items-center justify-center">
-                <div className="absolute inset-0 bg-yellow-400/5 blur-3xl rounded-full scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              {/* Image Container */}
+              <div className="relative h-40 md:h-52 mb-4 overflow-hidden flex items-center justify-center">
+                {/* Subtle Glow on Hover */}
+                <div className="absolute inset-0 bg-yellow-400/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                
                 <img 
                   src={car.img} 
                   alt={car.name} 
-                  className="w-full h-full object-contain relative z-10 group-hover:scale-110 transition-transform duration-700 pointer-events-none" 
+                  className="w-full h-full object-contain relative z-10 group-hover:scale-110 transition-transform duration-700 pointer-events-none drop-shadow-2xl" 
                 />
               </div>
 
-              {/* Title and Action */}
-              <div className="flex justify-between items-end mb-6">
+              {/* Title and Price */}
+              <div className="flex justify-between items-start mb-6">
                 <div>
-                  <h3 className="text-2xl font-black text-white italic uppercase tracking-tight leading-tight">
+                  <h3 className="text-2xl font-black text-black italic uppercase tracking-tight leading-tight group-hover:text-yellow-600 transition-colors">
                     {car.name}
                   </h3>
-                  <p className="text-yellow-400 font-bold text-xs uppercase tracking-widest mt-1">
-                    Starting ₹{car.price}/day
-                  </p>
+                  <div className="flex items-center gap-1.5 mt-1">
+                    <span className="text-yellow-500 font-black text-xl italic">₹{car.price}</span>
+                    <span className="text-[10px] text-gray-400 font-bold uppercase">/ Day</span>
+                  </div>
                 </div>
+                
                 <motion.button 
                   whileTap={{ scale: 0.9 }}
-                  className="bg-white/5 p-4 rounded-2xl border border-white/10 group-hover:bg-yellow-400 group-hover:text-black transition-all duration-300"
+                  className="bg-black text-white p-3.5 md:p-4 rounded-2xl group-hover:bg-yellow-400 group-hover:text-black transition-all duration-300 shadow-md"
                 >
-                  <ChevronRight size={20} strokeWidth={3} />
+                  <ChevronRight size={18} strokeWidth={3} />
                 </motion.button>
               </div>
 
               {/* Specs Bar */}
-              <div className="grid grid-cols-3 gap-2 border-t border-white/5 pt-6">
-                <div className="flex flex-col items-center gap-1.5">
-                  <Users size={16} className="text-gray-600 group-hover:text-yellow-400 transition-colors" />
-                  <span className="text-[9px] text-white font-black uppercase tracking-tighter">{car.seats} Seats</span>
+              <div className="grid grid-cols-3 gap-1 py-4 border-t border-yellow-100 bg-yellow-50/30 rounded-2xl px-2">
+                <div className="flex flex-col items-center gap-1 border-r border-yellow-100">
+                  <Users size={14} className="text-gray-400 group-hover:text-yellow-500 transition-colors" />
+                  <span className="text-[9px] text-black font-black uppercase tracking-tighter">{car.seats} Seats</span>
                 </div>
-                <div className="flex flex-col items-center gap-1.5 border-x border-white/5">
-                  <Fuel size={16} className="text-gray-600 group-hover:text-yellow-400 transition-colors" />
-                  <span className="text-[9px] text-white font-black uppercase tracking-tighter">{car.fuel}</span>
+                <div className="flex flex-col items-center gap-1 border-r border-yellow-100">
+                  <Fuel size={14} className="text-gray-400 group-hover:text-yellow-500 transition-colors" />
+                  <span className="text-[9px] text-black font-black uppercase tracking-tighter">{car.fuel}</span>
                 </div>
-                <div className="flex flex-col items-center gap-1.5">
-                  <Gauge size={16} className="text-gray-600 group-hover:text-yellow-400 transition-colors" />
-                  <span className="text-[9px] text-white font-black uppercase tracking-tighter">{car.gear}</span>
+                <div className="flex flex-col items-center gap-1">
+                  <Gauge size={14} className="text-gray-400 group-hover:text-yellow-500 transition-colors" />
+                  <span className="text-[9px] text-black font-black uppercase tracking-tighter">{car.gear}</span>
                 </div>
               </div>
             </motion.div>
@@ -95,10 +103,12 @@ const Rent = () => {
         </div>
 
         {/* Bottom Disclaimer */}
-        <div className="mt-16 text-center">
-            <p className="text-gray-600 text-[9px] font-bold uppercase tracking-[0.2em]">
-                *Terms & Conditions Apply • Fuel charges not included • ID Proof Required
-            </p>
+        <div className="mt-12 md:mt-16 text-center">
+            <div className="inline-block px-6 py-2 bg-white border-2 border-yellow-400 rounded-full shadow-md">
+                <p className="text-black text-[8px] md:text-[10px] font-bold uppercase tracking-[0.2em]">
+                   *Conditions Apply • No Fuel Included • ID Proof Required
+                </p>
+            </div>
         </div>
       </div>
     </div>

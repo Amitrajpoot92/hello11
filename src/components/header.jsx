@@ -29,7 +29,7 @@ const Header = () => {
             className="text-2xl font-black tracking-[-0.1em] text-white italic cursor-pointer group"
             onClick={() => navigate('/')}
           >
-            HELLO<span className="text-yellow-400 group-hover:text-white transition-colors duration-300">11</span>
+            HELLO <span className="text-yellow-400 group-hover:text-white transition-colors duration-300">11</span>
           </motion.div>
           
           <motion.a 

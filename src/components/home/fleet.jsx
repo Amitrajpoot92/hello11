@@ -1,7 +1,7 @@
-import React from 'react';
-import { Users, Wind, ArrowUpRight, IndianRupee, ChevronRight, Fuel } from 'lucide-react';
+import React, { useRef } from 'react';
+import { Users, Wind, ArrowUpRight, IndianRupee, ChevronRight, ChevronLeft, Fuel } from 'lucide-react';
 
-// Path ko ../ se badal kar ../../ karein
+// Assets path
 import car1 from '../../assets/cars/car1.webp';
 import car2 from '../../assets/cars/car2.webp';
 import car3 from '../../assets/cars/car3.webp';
@@ -19,100 +19,138 @@ const cars = [
 ];
 
 const Fleet = () => {
+  const scrollRef = useRef(null);
+
+  const scroll = (direction) => {
+    if (scrollRef.current) {
+      const { scrollLeft, clientWidth } = scrollRef.current;
+      const scrollTo = direction === 'left' 
+        ? scrollLeft - clientWidth / 1.5 
+        : scrollLeft + clientWidth / 1.5;
+      
+      scrollRef.current.scrollTo({ left: scrollTo, behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section className="bg-black py-12 md:py-20 overflow-hidden">
-      {/* Hidden Scrollbar Styles */}
+    <section className="bg-white py-10 md:py-24 overflow-hidden relative">
       <style dangerouslySetInnerHTML={{__html: `
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .car-floating-shadow { filter: drop-shadow(0 35px 25px rgba(0,0,0,0.25)); }
       `}} />
 
-      {/* Header */}
-      <div className="container mx-auto px-6 mb-8 md:mb-12 flex justify-between items-end">
-        <div className="relative">
-          <span className="text-yellow-400 font-black tracking-[0.4em] uppercase text-[10px] md:text-xs mb-2 block">Premium Fleet</span>
-          <h2 className="text-5xl md:text-8xl font-black text-white italic uppercase tracking-tighter leading-none">
-            ELITE <span className="text-yellow-400">CARS</span>
+      {/* Header Section */}
+      <div className="container mx-auto px-4 md:px-6 mb-8 md:mb-16 flex justify-between items-end">
+        <div>
+          <div className="flex items-center gap-2 mb-1 md:mb-2">
+            <div className="h-[2px] w-8 md:w-12 bg-yellow-500"></div>
+            <span className="text-yellow-600 font-bold tracking-widest uppercase text-[10px] md:text-xs">Elite Fleet</span>
+          </div>
+          <h2 className="text-4xl md:text-8xl font-black text-black leading-none tracking-tighter uppercase">
+            Modern <span className="text-gray-200 block md:inline">Garage</span>
           </h2>
-        </div>
-        <div className="flex items-center gap-3 text-gray-500 font-bold uppercase text-[10px] tracking-widest">
-          Scroll <ChevronRight size={14} className="text-yellow-400 animate-bounce-x" />
         </div>
       </div>
 
-      {/* Horizontal Scroll Container */}
-      <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 md:gap-10 px-6 md:px-[10vw] pb-10 no-scrollbar">
+      {/* Main Scroller */}
+      <div 
+        ref={scrollRef}
+        className="flex overflow-x-auto snap-x snap-mandatory gap-4 md:gap-10 px-4 md:px-[8vw] pb-12 no-scrollbar"
+      >
         {cars.map((car) => (
           <div 
             key={car.id} 
-            className="flex-none w-[85vw] md:w-[60vw] lg:w-[40vw] h-auto snap-center relative mt-16 group"
+            className="flex-none w-[90vw] md:w-[45vw] lg:w-[30vw] snap-center relative mt-12 group"
           >
-            {/* Card Background */}
-            <div className="absolute inset-0 top-16 bg-[#0c0c0c] rounded-[3rem] border border-white/5 shadow-2xl transition-all duration-500 group-hover:border-yellow-400/20" />
+            {/* Card Background with Yellow Border */}
+            <div className="absolute inset-0 top-8 bg-white rounded-[2rem] border-[1.5px] border-yellow-400 shadow-xl transition-all duration-500 group-hover:shadow-yellow-400/10 group-hover:-translate-y-1" />
             
-            <div className="relative z-10 p-6 md:p-10 flex flex-col h-full">
-              {/* Car Image: Updated to use imported variable */}
-              <div className="relative h-40 md:h-64 flex items-center justify-center">
-                <div className="absolute inset-0 bg-yellow-400/5 blur-[80px] rounded-full scale-90 group-hover:scale-110 transition-transform duration-700" />
+            <div className="relative z-10 p-5 md:p-8 flex flex-col h-full">
+              {/* Car Image Pop-out */}
+              <div className="relative h-36 md:h-52 flex items-center justify-center -mt-16 mb-2">
                 <img 
                   src={car.img} 
                   alt={car.name} 
-                  className="w-full h-full object-contain drop-shadow-[0_30px_35px_rgba(0,0,0,0.9)] transform -translate-y-16 group-hover:-translate-y-20 transition-all duration-500 ease-out"
+                  className="w-full h-full object-contain car-floating-shadow transform transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
 
-              {/* Details */}
-              <div className="flex flex-col -mt-4 md:mt-2">
-                <div className="flex justify-between items-center mb-3">
-                  <span className="text-yellow-400 font-black text-[9px] md:text-[10px] tracking-widest uppercase bg-yellow-400/10 px-2.5 py-1 rounded border border-yellow-400/20">
-                    {car.type}
-                  </span>
-                  <span className="text-white/10 font-black italic text-2xl">0{car.id}</span>
+              {/* ID & Type Tag */}
+              <div className="flex justify-between items-center mb-4">
+                <span className="bg-black text-yellow-400 text-[8px] md:text-[10px] font-bold tracking-widest px-2.5 py-1 rounded uppercase">
+                  {car.type}
+                </span>
+                <span className="text-gray-100 font-black text-4xl md:text-5xl leading-none">0{car.id}</span>
+              </div>
+              
+              <h3 className="text-2xl md:text-4xl font-black text-black uppercase leading-tight tracking-tighter mb-4">
+                {car.name}
+              </h3>
+
+              {/* Specs Grid */}
+              <div className="grid grid-cols-3 gap-1 py-4 border-y border-gray-100 mb-6">
+                <div className="flex flex-col items-center border-r border-gray-100">
+                  <Users size={14} className="text-yellow-500 mb-1" />
+                  <span className="text-black text-[10px] md:text-xs font-bold">{car.seats}</span>
+                </div>
+                <div className="flex flex-col items-center border-r border-gray-100">
+                  <Wind size={14} className="text-yellow-500 mb-1" />
+                  <span className="text-black text-[10px] md:text-xs font-bold">{car.ac}</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <Fuel size={14} className="text-yellow-500 mb-1" />
+                  <span className="text-black text-[10px] md:text-xs font-bold uppercase">{car.fuel.split('/')[0]}</span>
+                </div>
+              </div>
+
+              {/* Pricing & CTA */}
+              <div className="flex items-center justify-between mt-auto">
+                <div>
+                  <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Starts at</span>
+                  <div className="flex items-baseline text-black font-black text-2xl md:text-4xl leading-none">
+                    <span className="text-yellow-500 text-lg md:text-2xl font-bold mr-0.5">₹</span>
+                    {car.rate}
+                    <span className="text-[10px] text-gray-400 ml-1">/KM</span>
+                  </div>
                 </div>
                 
-                <h3 className="text-3xl md:text-5xl font-black text-white italic uppercase leading-none tracking-tighter mb-4">
-                  {car.name}
-                </h3>
-
-                {/* Specs */}
-                <div className="flex items-center gap-3 md:gap-5 py-3 border-y border-white/5 mb-5">
-                  <div className="flex items-center gap-1.5">
-                    <Users size={14} className="text-yellow-400" />
-                    <span className="text-gray-300 text-[11px] md:text-sm font-bold uppercase">{car.seats}</span>
-                  </div>
-                  <div className="w-[1px] h-3 bg-white/20" />
-                  <div className="flex items-center gap-1.5">
-                    <Wind size={14} className="text-yellow-400" />
-                    <span className="text-gray-300 text-[11px] md:text-sm font-bold uppercase">{car.ac}</span>
-                  </div>
-                  <div className="w-[1px] h-3 bg-white/20" />
-                  <div className="flex items-center gap-1.5">
-                    <Fuel size={14} className="text-yellow-400" />
-                    <span className="text-gray-300 text-[11px] md:text-sm font-bold uppercase">{car.fuel}</span>
-                  </div>
-                </div>
-
-                {/* Pricing & CTA */}
-                <div className="flex items-center justify-between mt-auto">
-                  <div className="flex flex-col leading-tight">
-                    <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Starting Price</span>
-                    <div className="flex items-center text-yellow-400 font-black text-3xl md:text-4xl italic tracking-tighter">
-                      <IndianRupee size={22} strokeWidth={3} />
-                      <span>{car.rate}/KM</span>
-                    </div>
-                  </div>
-                  
-                  <a 
-                    href={`https://wa.me/91XXXXXXXXXX?text=Book ${car.name}`}
-                    className="bg-yellow-400 hover:bg-white text-black p-4 md:p-5 rounded-[1.5rem] transition-all duration-300 shadow-xl hover:shadow-yellow-400/20 active:scale-90"
-                  >
-                    <ArrowUpRight size={24} strokeWidth={3} />
-                  </a>
-                </div>
+                <a 
+                  href={`https://wa.me/91XXXXXXXXXX?text=Book ${car.name}`}
+                  className="bg-yellow-400 hover:bg-black text-black hover:text-white p-3 md:p-4 rounded-2xl transition-all duration-300 shadow-lg active:scale-95 group-hover:rotate-6"
+                >
+                  <ArrowUpRight size={24} strokeWidth={2.5} />
+                </a>
               </div>
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Navigation Controls (Below the scroller) */}
+      <div className="container mx-auto px-4 mt-8 flex justify-center items-center gap-6">
+        {/* Buttons only visible on Desktop, Swipe dots on Mobile */}
+        <div className="hidden md:flex gap-4">
+          <button 
+            onClick={() => scroll('left')}
+            className="p-4 border-2 border-black hover:bg-yellow-400 hover:border-yellow-400 transition-all rounded-full group"
+          >
+            <ChevronLeft size={24} className="group-active:-translate-x-1 transition-transform" />
+          </button>
+          <button 
+            onClick={() => scroll('right')}
+            className="p-4 bg-black text-white hover:bg-yellow-400 hover:text-black transition-all rounded-full group"
+          >
+            <ChevronRight size={24} className="group-active:translate-x-1 transition-transform" />
+          </button>
+        </div>
+
+        {/* Swipe Indicator for Mobile */}
+        <div className="md:hidden flex justify-center gap-1.5">
+          <div className="h-1 w-8 bg-yellow-400 rounded-full"></div>
+          <div className="h-1 w-2 bg-gray-200 rounded-full"></div>
+          <div className="h-1 w-2 bg-gray-200 rounded-full"></div>
+        </div>
       </div>
     </section>
   );
